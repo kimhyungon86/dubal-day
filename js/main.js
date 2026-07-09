@@ -111,4 +111,48 @@
     const days = Math.ceil((target - Date.now()) / 86400000);
     ddayEl.textContent = days > 0 ? days : (days === 0 ? 'DAY' : '종료');
   }
+
+  /* ---- 8. 프로모 팝업 ---- */
+  const promo = document.getElementById('promo');
+  if (promo) {
+    // 사용자 로컬 기준 오늘 날짜(YYYY-MM-DD)
+    const localToday = () => {
+      const d = new Date();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return d.getFullYear() + '-' + m + '-' + day;
+    };
+
+    const closePromo = () => {
+      if (promo.hidden) return;
+      promo.hidden = true;
+      document.body.style.overflow = '';
+      sessionStorage.setItem('dubal_promo_seen', '1');
+      const hide = document.getElementById('promoHide');
+      if (hide && hide.checked) {
+        localStorage.setItem('dubal_promo_hide', localToday());
+      }
+    };
+
+    const openPromo = () => {
+      promo.hidden = false;
+      document.body.style.overflow = 'hidden';
+      const x = promo.querySelector('.promo__x');
+      if (x) x.focus();
+    };
+
+    // 노출 판단: '오늘 하루 보지 않기'(localStorage) + 같은 세션 재등장 방지(sessionStorage)
+    const hiddenToday = localStorage.getItem('dubal_promo_hide') === localToday();
+    const seenSession = sessionStorage.getItem('dubal_promo_seen') === '1';
+    if (!hiddenToday && !seenSession) {
+      setTimeout(openPromo, 600);
+    }
+
+    promo.querySelectorAll('[data-close]').forEach((el) => {
+      el.addEventListener('click', closePromo);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePromo();
+    });
+  }
 })();
