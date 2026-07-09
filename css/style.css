@@ -144,27 +144,27 @@ a:focus-visible,
 .hero__stats b{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;color:#fff;line-height:1}
 .hero__stats span{font-size:.9rem;opacity:.85;margin-top:4px}
 .hero__joinflow{
-  position:absolute;left:50%;bottom:88px;z-index:4;transform:translateX(-50%);
-  width:min(500px,calc(100% - 40px));padding:12px 14px;
+  position:absolute;left:50%;bottom:82px;z-index:4;transform:translateX(-50%);
+  width:min(640px,calc(100% - 40px));padding:16px 18px;
   background:rgba(4,36,15,.62);border:1px solid rgba(199,242,132,.34);
   border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.12);
   backdrop-filter:blur(10px);
 }
-.hero__joinflow-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px}
-.hero__joinflow-head span{font-weight:900;color:#fff;font-size:.92rem}
+.hero__joinflow-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.hero__joinflow-head span{font-weight:900;color:#fff;font-size:1.08rem}
 .hero__joinflow-head small{font-size:.72rem;font-weight:800;color:var(--lime);border:1px solid rgba(199,242,132,.45);border-radius:999px;padding:.22em .64em}
 .joinflow__board{
   display:flex;align-items:baseline;justify-content:center;gap:10px;
   background:linear-gradient(180deg,#07170d,#020805);border:1px solid rgba(255,255,255,.16);
-  border-radius:14px;padding:7px 12px;margin-bottom:7px;
+  border-radius:16px;padding:11px 14px;margin-bottom:9px;
   box-shadow:inset 0 0 24px rgba(31,191,87,.18),0 8px 22px rgba(0,0,0,.24);
 }
 .joinflow__board span{
-  min-width:4ch;color:var(--lime);font-size:clamp(2rem,4.6vw,3.1rem);font-weight:900;line-height:1;
+  min-width:4ch;color:var(--lime);font-size:clamp(2.6rem,5.6vw,4.4rem);font-weight:900;line-height:1;
   font-variant-numeric:tabular-nums;text-shadow:0 0 18px rgba(199,242,132,.52);
 }
 .joinflow__board em{font-style:normal;font-size:1rem;font-weight:900;color:#fff}
-.joinflow__updated{margin:-3px 0 0;color:rgba(199,242,132,.92);font-size:.78rem;font-weight:800;font-variant-numeric:tabular-nums}
+.joinflow__updated{margin:-3px 0 0;color:rgba(199,242,132,.92);font-size:.88rem;font-weight:800;font-variant-numeric:tabular-nums}
 .hero__joinflow p{display:none}
 .joinflow__cta{display:none;align-items:center;justify-content:center;min-height:40px;padding:.62em 1.05em;border-radius:999px;background:var(--lime);color:var(--g-900);font-size:.92rem;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.18)}
 .joinflow__cta:hover{transform:translateY(-1px)}
@@ -195,8 +195,12 @@ a:focus-visible,
     animation:mascotFollowBob 2.2s var(--ease) infinite;
     transform:translateY(-50%);
   }
-  .hero__joinflow{bottom:96px;width:calc(100% - 28px);padding:11px 12px;border-radius:18px}
+  .hero__joinflow{bottom:92px;width:calc(100% - 28px);padding:10px 12px;border-radius:18px}
   .hero__joinflow-head{flex-direction:column;gap:5px}
+  .hero__joinflow-head span{font-size:.92rem}
+  .joinflow__board{padding:7px 12px;margin-bottom:7px}
+  .joinflow__board span{font-size:2.6rem}
+  .joinflow__updated{font-size:.78rem}
   .hero__meta .chip:nth-child(2){display:none}
 }
 @keyframes mascotMobileRoam{
