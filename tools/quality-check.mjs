@@ -88,16 +88,19 @@ assert(files.index.includes('hero__joinflow'), 'index: hero should include parti
 assert(files.index.includes('이미 신청이 이어지고 있어요'), 'index: hero momentum copy should frame social proof');
 assert(files.index.includes('data-participant-current'), 'index: hero should expose current participant count target');
 assert(files.index.includes('data-participant-updated'), 'index: hero should expose participant status timestamp');
-assert(files.index.includes('1100명'), 'index: participant momentum should use 1100 participant target');
-assert(files.index.includes('9/19') && files.index.includes('1,100명'), 'index: participant milestones should reach 1,100 by event day');
+assert(!files.index.includes('목표 1100명'), 'index: participant target copy should not be visible in hero');
+assert(!files.index.includes('joinflow__milestones'), 'index: participant milestone schedule should not be shown in hero');
 assert(files.index.includes('hero__mascot--roamer'), 'index: hero mascot should be configured as a roaming mascot');
 assert(files.css.includes('.hero__joinflow'), 'css: missing hero participant momentum styles');
 assert(files.css.includes('@keyframes mascotRoam'), 'css: missing roaming mascot animation');
 assert(!/max-width:680px\)\{[^}]*\.hero__mascot\{display:none/.test(files.css), 'css: mobile mascot should remain visible');
 assert(files.css.includes('@keyframes mascotMobileRoam'), 'css: missing mobile roaming mascot animation');
+assert(files.css.includes('hero__mascot.is-following'), 'css: mobile mascot should have sticky follow state');
+assert(files.js.includes('toggleMascotFollow'), 'js: missing mobile mascot follow-on-scroll behavior');
 assert(files.js.includes('getProjectedParticipants'), 'js: missing date-based participant projection');
 assert(files.js.includes('data-participant-current'), 'js: projected participant count should update hero momentum block');
 assert(files.js.includes('data-participant-updated'), 'js: participant momentum block should show timestamp');
+assert(files.js.includes('setInterval(updateParticipantBoard'), 'js: participant status timestamp should update live');
 
 for (const [name, html] of Object.entries({ poster: files.poster, catalog: files.catalog })) {
   assert(/<title>.+<\/title>/.test(html), `${name}: missing document title`);

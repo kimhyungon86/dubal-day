@@ -14,6 +14,17 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  /* ---- 1-1. 모바일 마스코트: 스크롤 후 작게 따라오기 ---- */
+  const heroMascot = document.querySelector('.hero__mascot');
+  const toggleMascotFollow = () => {
+    if (!heroMascot) return;
+    const isMobile = window.matchMedia('(max-width: 680px)').matches;
+    heroMascot.classList.toggle('is-following', isMobile && window.scrollY > window.innerHeight * 0.72);
+  };
+  window.addEventListener('scroll', toggleMascotFollow, { passive: true });
+  window.addEventListener('resize', toggleMascotFollow);
+  toggleMascotFollow();
+
   /* ---- 2. 숫자 카운터 ---- */
   function animateCount(el) {
     const to = parseInt(el.dataset.to, 10) || 0;
@@ -147,8 +158,9 @@
     return points[points.length - 1].count;
   }
 
-  const participantEls = document.querySelectorAll('[data-participant-current]');
-  if (participantEls.length) {
+  function updateParticipantBoard() {
+    const participantEls = document.querySelectorAll('[data-participant-current]');
+    if (!participantEls.length) return;
     const now = getKstNow();
     const projected = getProjectedParticipants(now).toLocaleString('ko-KR');
     participantEls.forEach((el) => {
@@ -164,6 +176,8 @@
       updated.textContent = month + '월 ' + day + '일 ' + hour + ':' + minute + ' 현재 누적 신청 현황';
     }
   }
+  updateParticipantBoard();
+  setInterval(updateParticipantBoard, 30000);
 
   /* ---- 9. 프로모 팝업 ---- */
   const promo = document.getElementById('promo');
