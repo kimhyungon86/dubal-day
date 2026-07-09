@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Pretendard Variable",Pretendard,sans-serif}
+  :root{
+    --g6:#12a04a;--g7:#0b7a37;--g8:#063d1a;--lime:#c7f284;
+    --sky1:#7fd4f5;--sky2:#4bb8ec;--orange:#fb7a35;--gold:#f6c945;--ink:#0c1f13;
+  }
+  body{width:1000px;background:#fff}
+  .poster{
+    width:1000px;min-height:1414px;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 34%,#bfe9c4 52%,#8ed88f 100%);
+  }
+  /* clouds */
+  .cloud{position:absolute;background:#fff;border-radius:50%;opacity:.9;filter:blur(1px)}
+  .c1{width:150px;height:56px;top:70px;left:70px;box-shadow:70px 10px 0 -6px #fff,140px -6px 0 -14px #fff}
+  .c2{width:120px;height:46px;top:130px;right:90px;box-shadow:-60px 12px 0 -6px #fff,60px 6px 0 -12px #fff}
+  /* balloons */
+  .balloon{position:absolute;width:52px;height:64px;border-radius:50%;top:120px}
+  .balloon::after{content:"";position:absolute;bottom:-8px;left:50%;width:2px;height:26px;background:rgba(255,255,255,.6)}
+  .bl{left:60px;background:radial-gradient(circle at 35% 30%,#ffd36b,var(--orange))}
+  .br{right:64px;background:radial-gradient(circle at 35% 30%,#8fd0ff,#2a8fe0)}
+
+  .inner{position:relative;z-index:3;padding:54px 54px 40px}
+
+  /* title */
+  .title-wrap{text-align:center;margin-top:6px}
+  .title{
+    font-size:118px;font-weight:900;letter-spacing:-2px;color:#fff;line-height:.94;
+    text-shadow:0 3px 0 var(--g7),0 6px 0 var(--g8),0 10px 0 rgba(6,61,26,.5),0 22px 30px rgba(0,0,0,.35);
+  }
+  .sub5{display:inline-block;margin-top:10px;font-size:52px;font-weight:900;color:var(--gold);
+    -webkit-text-stroke:3px #fff;text-shadow:0 4px 0 #d89a1e,0 8px 16px rgba(0,0,0,.3)}
+  .flag{height:26px;margin:16px auto 0;width:70%;
+    background:repeating-linear-gradient(90deg,#111 0 26px,#fff 26px 52px);
+    border-radius:4px;box-shadow:0 4px 10px rgba(0,0,0,.25);transform:rotate(-1deg)}
+
+  .slogan-rib{display:inline-block;margin:18px auto 0;background:var(--g7);color:#fff;
+    font-size:26px;font-weight:800;padding:10px 30px;border-radius:999px;box-shadow:0 6px 0 var(--g8)}
+
+  /* prize badges row */
+  .prizes{display:flex;justify-content:center;align-items:flex-end;gap:22px;margin:28px 0 6px}
+  .pz{background:#fff;border-radius:20px;padding:16px 20px;text-align:center;box-shadow:0 10px 22px rgba(0,0,0,.18);border:3px solid}
+  .pz .rk{font-size:24px;font-weight:900;color:#fff;padding:4px 16px;border-radius:999px;display:inline-block;margin-bottom:8px}
+  .pz .nm{font-size:20px;font-weight:800;color:var(--ink);line-height:1.3}
+  .pz2{border-color:#b8c2cc}.pz2 .rk{background:#9aa7b3}
+  .pz1{border-color:var(--gold);transform:scale(1.14);padding:20px 26px}.pz1 .rk{background:var(--orange)}
+  .pz3{border-color:#d8a56a}.pz3 .rk{background:#cf8a4a}
+
+  /* super cub hero image */
+  .cub{display:block;width:760px;margin:6px auto -4px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.28))}
+
+  /* info row */
+  .info{display:flex;gap:18px;margin:8px 0 0}
+  .ibox{flex:1;background:rgba(255,255,255,.94);border-radius:18px;padding:20px 22px;box-shadow:0 8px 18px rgba(0,0,0,.14)}
+  .ibox .lb{display:inline-block;background:var(--g6);color:#fff;font-weight:800;font-size:17px;padding:4px 14px;border-radius:999px;margin-bottom:10px}
+  .ibox .bg{font-size:30px;font-weight:900;color:var(--g7);line-height:1.15}
+  .ibox .sm{font-size:17px;color:#40554a;font-weight:600;margin-top:4px}
+
+  /* apply row */
+  .apply{display:flex;align-items:center;gap:22px;background:#fff;border-radius:20px;padding:20px 26px;margin-top:18px;box-shadow:0 10px 22px rgba(0,0,0,.14)}
+  .jma{font-size:44px;font-weight:900;color:var(--g6);line-height:1;letter-spacing:-1px}
+  .jma small{display:block;font-size:15px;color:var(--ink);font-weight:700;letter-spacing:0}
+  .apply .mid{flex:1;text-align:center}
+  .apply .mid b{font-size:22px;font-weight:900;color:var(--ink)}
+  .apply .mid p{font-size:17px;color:#40554a;font-weight:600;margin-top:2px}
+  .apply .qr{width:96px;height:96px;border-radius:10px;border:3px solid var(--g6)}
+  .host{text-align:center}
+  .host .lb{background:var(--sky2);color:#fff;font-weight:800;font-size:15px;padding:3px 12px;border-radius:999px}
+  .host b{display:block;font-size:16px;font-weight:800;color:var(--ink);margin-top:6px}
+
+  /* sponsors */
+  .spon{background:rgba(255,255,255,.94);border-radius:20px;padding:18px 24px;margin-top:16px;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+  .spon .h{font-size:18px;font-weight:900;color:var(--g7);text-align:center;margin-bottom:10px}
+  .spon .h span{background:var(--g6);color:#fff;padding:4px 16px;border-radius:999px}
+  .spon .list{font-size:17.5px;font-weight:600;color:#2c3d33;text-align:center;line-height:1.7}
+
+  /* footer slogan */
+  .foot{margin-top:18px;text-align:center;background:linear-gradient(90deg,var(--g7),var(--g6));border-radius:18px;padding:18px;color:#fff}
+  .foot b{font-size:26px;font-weight:900;display:block;line-height:1.35}
+  .foot .em{color:var(--lime)}
+
+  .mascot{position:absolute;top:150px;left:24px;width:170px;z-index:4;filter:drop-shadow(0 10px 18px rgba(0,0,0,.3))}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="balloon bl"></div>
+  <div class="balloon br"></div>
+  <img class="mascot" src="../assets/3d/mascot_thumbsup.png" alt="" />
+
+  <div class="inner">
+    <div class="title-wrap">
+      <div class="title">두발인의 날</div>
+      <div class="sub5">5th</div>
+      <div class="flag"></div>
+      <div class="slogan-rib">진심으로 달린다</div>
+    </div>
+
+    <div class="prizes">
+      <div class="pz pz2"><span class="rk">2등</span><div class="nm">알파인스타즈<br/>슈퍼테일 부츠</div></div>
+      <div class="pz pz1"><span class="rk">1등</span><div class="nm">26년식<br/>혼다 슈퍼커브</div></div>
+      <div class="pz pz3"><span class="rk">3등</span><div class="nm">세나<br/>60S</div></div>
+    </div>
+
+    <img class="cub" src="../assets/3d/prize_supercub.png" alt="1등 경품 혼다 슈퍼커브" />
+
+    <div class="info">
+      <div class="ibox">
+        <span class="lb">일시</span>
+        <div class="bg">2026. 9. 19 <span style="font-size:20px">(토)</span></div>
+        <div class="sm">오전 10:00 ~ 오후 4:00</div>
+      </div>
+      <div class="ibox">
+        <span class="lb">장소</span>
+        <div class="bg">모터뱅크 부안</div>
+        <div class="sm">전북특별자치도 부안군 행안면 역리 1172</div>
+      </div>
+    </div>
+
+    <div class="apply">
+      <div class="jma">JMA<small>전북모터사이클협회</small></div>
+      <div class="mid"><b>참가 신청</b><p>네이버폼으로 간편 신청 · 참가비 20,000원(식사 제공)</p></div>
+      <img class="qr" src="../assets/qr/apply_qr.jpeg" alt="참가신청 QR" />
+      <div class="host"><span class="lb">주최</span><b>전북모터사이클협회</b></div>
+    </div>
+
+    <div class="spon">
+      <div class="h"><span>협력 · 후원 업체</span></div>
+      <div class="list">
+        알파인스타즈 코리아 · 허스크바나 코리아 · 리퀴몰리 · 레인조아카데미 · 혼다(전주·익산점) · 야마하(익산점) · 바이크# · 올인원골드(전주점) · (주)모터뱅크 · 그랜드운전학원 · 윤팩토리 · 하스이퀍먼트 · 데칼팩토리 · 알파카라이프 · 양푼리(익산모현점) · 바이크마트
+      </div>
+    </div>
+
+    <div class="foot">
+      <b>안전한 라이딩, 건강한 문화 —<br/><span class="em">전북모터사이클협회</span>가 함께합니다!</b>
+    </div>
+  </div>
+</div>
+</body>
+</html>
