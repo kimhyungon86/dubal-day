@@ -95,4 +95,12 @@
       heroVideo.style.display = 'none';
     });
   }
+
+  /* ---- 7. D-day 카운트다운 ---- */
+  const ddayEl = document.getElementById('ddayN');
+  if (ddayEl) {
+    const target = new Date('2026-09-19T00:00:00+09:00').getTime();
+    const days = Math.ceil((target - Date.now()) / 86400000);
+    ddayEl.textContent = days > 0 ? days : (days === 0 ? 'DAY' : '종료');
+  }
 })();
