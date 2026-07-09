@@ -155,4 +155,50 @@
       if (e.key === 'Escape') closePromo();
     });
   }
+
+  /* ---- 9. 장소 길찾기 바로가기 ---- */
+  const navFind = document.getElementById('navFind');
+  const navPop = document.getElementById('navPop');
+  if (navFind && navPop) {
+    const q = encodeURIComponent('(주)모터뱅크 부안');
+    const urls = {
+      kakao: 'https://map.kakao.com/link/search/' + q,
+      naver: 'https://map.naver.com/p/search/' + q,
+      tmap: 'tmap://search?name=' + q,
+      kakaonavi: 'https://map.kakao.com/link/search/' + q, // 좌표 미확보 → 카카오맵 검색 폴백
+    };
+
+    const setOpen = (open) => {
+      navPop.hidden = !open;
+      navFind.setAttribute('aria-expanded', String(open));
+    };
+
+    navFind.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(navPop.hidden);
+    });
+
+    navPop.querySelectorAll('.navpop__item').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const url = urls[btn.dataset.map];
+        if (btn.dataset.map === 'tmap') {
+          // 티맵 앱 스킴 시도 → 미설치 시 카카오맵 검색으로 폴백
+          const fallback = urls.kakao;
+          const timer = setTimeout(() => window.open(fallback, '_blank', 'noopener'), 1200);
+          window.addEventListener('blur', () => clearTimeout(timer), { once: true });
+          window.location.href = url;
+        } else {
+          window.open(url, '_blank', 'noopener');
+        }
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navPop.hidden && !navPop.contains(e.target) && e.target !== navFind) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
 })();

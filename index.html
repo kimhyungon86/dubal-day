@@ -139,10 +139,17 @@
         <h3>일시</h3>
         <p>2026년 9월 19일 (토)<br/>오전 10시 – 오후 4시</p>
       </div>
-      <div class="info-card reveal">
+      <div class="info-card info-card--nav reveal">
         <span class="info-card__ico">📍</span>
         <h3>장소</h3>
         <p>부안군 행안면 역리 1172<br/>(주) 모터뱅크</p>
+        <button type="button" class="nav-find" id="navFind" aria-expanded="false" aria-controls="navPop">🧭 길찾기</button>
+        <div class="navpop" id="navPop" role="menu" hidden>
+          <button type="button" class="navpop__item" data-map="kakao" role="menuitem"><i class="navpop__dot navpop__dot--kakao"></i>카카오맵<span>›</span></button>
+          <button type="button" class="navpop__item" data-map="kakaonavi" role="menuitem"><i class="navpop__dot navpop__dot--kakao"></i>카카오내비<span>›</span></button>
+          <button type="button" class="navpop__item" data-map="tmap" role="menuitem"><i class="navpop__dot navpop__dot--tmap"></i>티맵<span>›</span></button>
+          <button type="button" class="navpop__item" data-map="naver" role="menuitem"><i class="navpop__dot navpop__dot--naver"></i>네이버지도<span>›</span></button>
+        </div>
       </div>
       <div class="info-card reveal">
         <span class="info-card__ico">🏁</span>
@@ -266,9 +273,9 @@
           <span>오전</span><small>10:00 – 12:00</small>
         </div>
         <ul class="prog-list">
-          <li><span class="prog-ico">🏍️</span><div><b>오프로드 무료 체험</b><p>전문 강사와 함께하는 안전한 오프로드 라이딩</p></div></li>
-          <li><span class="prog-ico">⚡</span><div><b>전기바이크 무료 시승</b><p>최신 전기 이륜차를 직접 타보는 기회</p></div></li>
-          <li><span class="prog-ico">🛍️</span><div><b>협력점 용품 할인</b><p>헬멧·라이딩 기어를 특별가로</p></div></li>
+          <li><span class="prog-ico">🏍️</span><div><b>허스크바나 오프로드 무료 체험</b><p>전문 강사와 함께하는 안전한 오프로드 라이딩</p><span class="prog-brand"><img src="assets/logo/husqvarna.svg" alt="Husqvarna" loading="lazy"/></span></div></li>
+          <li><span class="prog-ico">🏍️</span><div><b>허스크바나 &amp; CFMOTO 온·오프로드 무료 시승</b><p>온로드부터 오프로드까지 직접 타보는 시승 행사</p><span class="prog-brand"><img src="assets/logo/husqvarna.svg" alt="Husqvarna" loading="lazy"/><b class="prog-word">CFMOTO</b></span></div></li>
+          <li><span class="prog-ico">🛍️</span><div><b>협력점 용품 할인</b><p>알파인스타 등 다수 업체 · 헬멧·라이딩 기어를 현장 특별가로</p><span class="prog-brand"><img src="assets/logo/alpinestars.svg" alt="Alpinestars" loading="lazy"/></span></div></li>
         </ul>
       </div>
 
