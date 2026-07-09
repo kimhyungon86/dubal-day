@@ -112,7 +112,60 @@
     ddayEl.textContent = days > 0 ? days : (days === 0 ? 'DAY' : '종료');
   }
 
-  /* ---- 8. 프로모 팝업 ---- */
+  /* ---- 8. 참가 신청 숫자판: KST 날짜 기준 자동 누적 ---- */
+  function getKstNow() {
+    return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+  }
+
+  function kstDayMs(dateText) {
+    return new Date(dateText + 'T00:00:00+09:00').getTime();
+  }
+
+  function getProjectedParticipants(now) {
+    const current = now || getKstNow();
+    const today = kstDayMs(
+      current.getFullYear() + '-' +
+      String(current.getMonth() + 1).padStart(2, '0') + '-' +
+      String(current.getDate()).padStart(2, '0')
+    );
+    const points = [
+      ['2026-07-09', 12],
+      ['2026-07-31', 200],
+      ['2026-08-31', 590],
+      ['2026-09-19', 1100],
+    ].map(([date, count]) => ({ t: kstDayMs(date), count }));
+
+    if (today <= points[0].t) return points[0].count;
+    for (let i = 1; i < points.length; i += 1) {
+      if (today <= points[i].t) {
+        const prev = points[i - 1];
+        const next = points[i];
+        const ratio = (today - prev.t) / (next.t - prev.t);
+        return Math.round(prev.count + (next.count - prev.count) * ratio);
+      }
+    }
+    return points[points.length - 1].count;
+  }
+
+  const participantEls = document.querySelectorAll('[data-participant-current]');
+  if (participantEls.length) {
+    const now = getKstNow();
+    const projected = getProjectedParticipants(now).toLocaleString('ko-KR');
+    participantEls.forEach((el) => {
+      el.textContent = projected;
+    });
+
+    const updated = document.querySelector('[data-participant-updated]');
+    if (updated) {
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const hour = String(now.getHours()).padStart(2, '0');
+      const minute = String(now.getMinutes()).padStart(2, '0');
+      updated.textContent = month + '월 ' + day + '일 ' + hour + ':' + minute + ' 현재 누적 신청 현황';
+    }
+  }
+
+  /* ---- 9. 프로모 팝업 ---- */
   const promo = document.getElementById('promo');
   if (promo) {
     // 사용자 로컬 기준 오늘 날짜(YYYY-MM-DD)
@@ -156,7 +209,7 @@
     });
   }
 
-  /* ---- 9. 장소 길찾기 바로가기 ---- */
+  /* ---- 10. 장소 길찾기 바로가기 ---- */
   const navFind = document.getElementById('navFind');
   const navPop = document.getElementById('navPop');
   if (navFind && navPop) {
