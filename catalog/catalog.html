@@ -2,15 +2,19 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=1000, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>제5회 두발인의 날 · 카탈로그</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:"Pretendard Variable",Pretendard,sans-serif}
   :root{--g5:#1fbf57;--g6:#12a04a;--g7:#0b7a37;--g8:#063d1a;--lime:#c7f284;
     --sky1:#7fd4f5;--sky2:#4bb8ec;--orange:#fb7a35;--gold:#f6c945;--ink:#0c1f13;--cream:#f4faf1;--muted:#4d635a;--line:#dcece1}
-  body{width:1000px;background:#eee}
-  .page{width:1000px;height:1414px;position:relative;overflow:hidden;background:#fff;margin-bottom:24px}
+  body{width:min(100vw, 1000px);background:#eee;overflow-x:hidden}
+  .page{width:1000px;height:1414px;position:relative;overflow:hidden;background:#fff;margin-bottom:24px;transform-origin:top left}
+  @media(max-width:1000px){
+    .page{width:100vw;height:141.4vw;transform:none;margin-bottom:24px}
+    .page > *{zoom:calc(100vw / 1000)}
+  }
   /* header band */
   .hd{background:linear-gradient(100deg,var(--g7),var(--g5));color:#fff;padding:40px 56px;display:flex;align-items:center;justify-content:space-between}
   .hd h2{font-size:46px;font-weight:900;letter-spacing:-1px}
@@ -173,8 +177,6 @@
     <img class="cub2" src="../assets/3d/prize_supercub.png" alt="1등 경품 슈퍼커브" />
     <div class="plist">
       <div class="pit"><span class="rk r1">1등</span><b>혼다 슈퍼커브 26년식</b></div>
-      <div class="pit"><span class="rk r2">2등</span><b>알파인스타즈 슈퍼테일 부츠</b></div>
-      <div class="pit"><span class="rk r3">3등</span><b>세나 60S</b></div>
       <div class="pit"><span class="rk r4">참가자</span><b>추첨을 통한 푸짐한 경품 증정</b></div>
     </div>
   </div>
@@ -220,7 +222,7 @@
     </div>
     <div class="sponbox">
       <h4>협력 · 후원 업체</h4>
-      <p>알파인스타즈 코리아 · 허스크바나 코리아 · 리퀴몰리 · 레인조아카데미 · 혼다(전주·익산점) · 야마하(익산점) · 바이크# · 올인원골드(전주점) · (주)모터뱅크 · 그랜드운전학원 · 윤팩토리 · 하스이퀍먼트 · 데칼팩토리 · 알파카라이프 · 양푼리(익산모현점) · 바이크마트</p>
+      <p>알파인스타즈 코리아 · 허스크바나 코리아 · 리퀴몰리 · 레인조아카데미 · 혼다(전주·익산점) · 야마하(익산점) · 바이크# · 올인원골드(전주점) · (주)모터뱅크 · 그랜드운전학원 · 윤팩토리 · 하스이퀍먼트 · 데칼팩토리 · 알파카라이프 · 양푼리(익산모현점) · 바이크마트 · 후원업체 1곳 확인중</p>
     </div>
   </div>
   <div class="foot"><span>안전한 라이딩, 건강한 문화</span><span>전북모터사이클협회가 함께합니다</span></div>
