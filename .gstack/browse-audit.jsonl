@@ -127,3 +127,11 @@
 {"ts":"2026-07-09T08:41:38.778Z","cmd":"screenshot","args":"/Users/goniru/Desktop/Coding/dubal-day/assets/catalog/cat_4.png --selector #p4","origin":"http://localhost:8899/catalog/catalog.html","durationMs":417,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-07-09T08:41:39.253Z","cmd":"screenshot","args":"/Users/goniru/Desktop/Coding/dubal-day/assets/catalog/cat_5.png --selector #p5","origin":"http://localhost:8899/catalog/catalog.html","durationMs":449,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-07-09T08:41:39.441Z","cmd":"screenshot","args":"/Users/goniru/Desktop/Coding/dubal-day/assets/catalog/cat_6.png --selector #p6","origin":"http://localhost:8899/catalog/catalog.html","durationMs":161,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:42:26.973Z","cmd":"goto","args":"http://localhost:8899","origin":"http://localhost:8899/","durationMs":51,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:42:27.010Z","cmd":"wait","args":"--load","origin":"http://localhost:8899/","durationMs":0,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:42:28.045Z","cmd":"js","args":"document.getElementById('ddayN') ? document.getElementById('ddayN').textContent : 'NO_EL'","origin":"http://localhost:8899/","durationMs":0,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:53:14.540Z","cmd":"viewport","args":"1440x900","origin":"http://localhost:8899/","durationMs":3,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:53:14.589Z","cmd":"goto","args":"http://localhost:8899","origin":"http://localhost:8899/","durationMs":17,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:53:14.632Z","cmd":"wait","args":"--load","origin":"http://localhost:8899/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:53:14.663Z","cmd":"js","args":"document.querySelectorAll('.reveal').forEach(e=>e.classList.add('is-inview'))","origin":"http://localhost:8899/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-09T08:53:16.822Z","cmd":"screenshot","args":"/tmp/ft.png --selector #firsttime","origin":"http://localhost:8899/","durationMs":122,"status":"ok","hasCookies":false,"mode":"launched"}

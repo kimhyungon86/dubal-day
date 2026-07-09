@@ -54,6 +54,14 @@
   );
 
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  // 같은 그룹 내 카드가 순차로 등장(스태거) — 더 역동적인 스크롤 연출
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) {
+      return c.classList.contains('reveal');
+    });
+    var idx = sibs.indexOf(el);
+    if (idx > 0) el.style.transitionDelay = Math.min(idx * 0.09, 0.45) + 's';
+  });
 
   // 히어로 스탯·성장그래프 카운터는 별도 관찰(부모 컨테이너)
   document.querySelectorAll('.hero__stats, .growth').forEach((el) => io.observe(el));
