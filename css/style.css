@@ -192,13 +192,25 @@ a:focus-visible,
 @media(max-width:680px){
   .hero{padding-top:84px;padding-bottom:64px}
   .hero__inner{margin-top:-58px}
-  .hero__mascot{display:none}
+  .hero__mascot{
+    display:block;height:96px;z-index:3;opacity:.95;
+    animation:mascotMobileRoam 16s var(--ease) infinite;
+  }
   .hero__joinflow{bottom:90px;width:calc(100% - 28px);padding:12px;border-radius:18px}
   .hero__joinflow-head{flex-direction:column;gap:5px}
   .hero__meta .chip:nth-child(2){display:none}
   .joinflow__milestones{grid-template-columns:repeat(2,1fr)}
   .hero__joinflow p{display:none}
   .joinflow__cta{display:none}
+}
+@keyframes mascotMobileRoam{
+  0%,100%{opacity:1;transform:translate3d(calc(100vw - 116px),18vh,0) rotate(0deg)}
+  18%{opacity:1;transform:translate3d(calc(100vw - 104px),10vh,0) rotate(5deg)}
+  38%{opacity:0;transform:translate3d(calc(100vw - 104px),10vh,0) rotate(5deg)}
+  50%{opacity:0;transform:translate3d(16px,10vh,0) rotate(-5deg)}
+  62%{opacity:1;transform:translate3d(16px,10vh,0) rotate(-5deg)}
+  82%{opacity:1;transform:translate3d(20px,19vh,0) rotate(4deg)}
+  92%{opacity:0;transform:translate3d(20px,19vh,0) rotate(4deg)}
 }
 .hero__scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:2px solid rgba(255,255,255,.6);border-radius:14px;z-index:2}
 .hero__scroll span{position:absolute;top:8px;left:50%;width:4px;height:8px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:scrolldot 1.6s var(--ease) infinite}

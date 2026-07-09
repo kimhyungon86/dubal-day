@@ -93,6 +93,8 @@ assert(files.index.includes('9/19') && files.index.includes('1,100명'), 'index:
 assert(files.index.includes('hero__mascot--roamer'), 'index: hero mascot should be configured as a roaming mascot');
 assert(files.css.includes('.hero__joinflow'), 'css: missing hero participant momentum styles');
 assert(files.css.includes('@keyframes mascotRoam'), 'css: missing roaming mascot animation');
+assert(!/max-width:680px\)\{[^}]*\.hero__mascot\{display:none/.test(files.css), 'css: mobile mascot should remain visible');
+assert(files.css.includes('@keyframes mascotMobileRoam'), 'css: missing mobile roaming mascot animation');
 assert(files.js.includes('getProjectedParticipants'), 'js: missing date-based participant projection');
 assert(files.js.includes('data-participant-current'), 'js: projected participant count should update hero momentum block');
 assert(files.js.includes('data-participant-updated'), 'js: participant momentum block should show timestamp');
