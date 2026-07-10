@@ -211,9 +211,8 @@ a:focus-visible,
     animation:mascotWalkMobile 18s linear infinite;
   }
   .hero__mascot.is-following{
-    position:fixed;top:56%;right:8px;left:auto;height:112px;z-index:80;
-    animation:mascotFollowBob 1.7s ease-in-out infinite;
-    transform:translateY(-50%);
+    position:fixed;bottom:74px;top:auto;right:auto;left:0;height:110px;z-index:80;
+    animation:mascotFollowWalk 8s linear infinite;
   }
   .hero__joinflow{bottom:88px;width:calc(100% - 28px);padding:7px 12px;border-radius:18px}
   .hero__joinflow-head{flex-direction:column;gap:5px}
@@ -233,11 +232,18 @@ a:focus-visible,
   82%{opacity:1;transform:translate3d(20px,19vh,0) rotate(4deg)}
   92%{opacity:0;transform:translate3d(20px,19vh,0) rotate(4deg)}
 }
-@keyframes mascotFollowBob{
-  0%,100%{transform:translateY(-50%) translateX(0) rotate(0deg)}
-  25%{transform:translateY(calc(-50% - 12px)) translateX(-5px) rotate(-4deg)}
-  50%{transform:translateY(-50%) translateX(0) rotate(0deg)}
-  75%{transform:translateY(calc(-50% - 8px)) translateX(4px) rotate(4deg)}
+@keyframes mascotFollowWalk{
+  0%{transform:translateX(3vw) translateY(0) scaleX(1)}
+  12%{transform:translateX(18vw) translateY(-11px) scaleX(1)}
+  24%{transform:translateX(33vw) translateY(0) scaleX(1)}
+  36%{transform:translateX(48vw) translateY(-11px) scaleX(1)}
+  46%{transform:translateX(60vw) translateY(0) scaleX(1)}
+  50%{transform:translateX(60vw) translateY(0) scaleX(-1)}
+  62%{transform:translateX(45vw) translateY(-11px) scaleX(-1)}
+  74%{transform:translateX(30vw) translateY(0) scaleX(-1)}
+  86%{transform:translateX(15vw) translateY(-11px) scaleX(-1)}
+  96%{transform:translateX(3vw) translateY(0) scaleX(-1)}
+  100%{transform:translateX(3vw) translateY(0) scaleX(1)}
 }
 .hero__scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:2px solid rgba(255,255,255,.6);border-radius:14px;z-index:2}
 .hero__scroll span{position:absolute;top:8px;left:50%;width:4px;height:8px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:scrolldot 1.6s var(--ease) infinite}
