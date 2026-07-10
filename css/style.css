@@ -168,18 +168,38 @@ a:focus-visible,
 .hero__joinflow p{display:none}
 .joinflow__cta{display:none;align-items:center;justify-content:center;min-height:40px;padding:.62em 1.05em;border-radius:999px;background:var(--lime);color:var(--g-900);font-size:.92rem;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.18)}
 .joinflow__cta:hover{transform:translateY(-1px)}
-.hero__mascot{position:absolute;left:0;top:0;height:min(30vh,260px);z-index:2;pointer-events:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.45))}
-.hero__mascot--roamer{animation:mascotRoam 22s var(--ease) infinite}
-@keyframes mascotRoam{
-  0%,100%{opacity:1;transform:translate3d(calc(100vw - min(30vh,260px) - 5vw),28vh,0) rotate(0deg)}
-  18%{opacity:1;transform:translate3d(calc(100vw - min(30vh,260px) - 7vw),11vh,0) rotate(5deg)}
-  36%{opacity:1;transform:translate3d(calc(100vw - min(30vh,260px) - 4vw),37vh,0) rotate(-4deg)}
-  44%{opacity:0;transform:translate3d(calc(100vw - min(30vh,260px) - 4vw),37vh,0) rotate(-4deg)}
-  50%{opacity:0;transform:translate3d(6vw,37vh,0) rotate(4deg)}
-  58%{opacity:1;transform:translate3d(6vw,37vh,0) rotate(4deg)}
-  76%{opacity:1;transform:translate3d(8vw,12vh,0) rotate(-5deg)}
-  88%{opacity:0;transform:translate3d(8vw,12vh,0) rotate(-5deg)}
-  94%{opacity:0;transform:translate3d(calc(100vw - min(30vh,260px) - 5vw),28vh,0) rotate(0deg)}
+.hero__mascot{position:absolute;left:0;bottom:6vh;top:auto;height:min(26vh,230px);z-index:2;pointer-events:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.45));will-change:transform}
+.hero__mascot--roamer{animation:mascotWalk 22s linear infinite}
+/* 좌우로 통통 걸어다니고, 끝에서 몸을 반대로 돌린다(scaleX) */
+@keyframes mascotWalk{
+  0%{transform:translateX(4vw) translateY(0) scaleX(1)}
+  10%{transform:translateX(19vw) translateY(-10px) scaleX(1)}
+  20%{transform:translateX(34vw) translateY(0) scaleX(1)}
+  30%{transform:translateX(48vw) translateY(-10px) scaleX(1)}
+  40%{transform:translateX(62vw) translateY(0) scaleX(1)}
+  46%{transform:translateX(71vw) translateY(-10px) scaleX(1)}
+  49%{transform:translateX(71vw) translateY(0) scaleX(1)}
+  50%{transform:translateX(71vw) translateY(0) scaleX(-1)}
+  60%{transform:translateX(56vw) translateY(-10px) scaleX(-1)}
+  70%{transform:translateX(42vw) translateY(0) scaleX(-1)}
+  80%{transform:translateX(27vw) translateY(-10px) scaleX(-1)}
+  90%{transform:translateX(12vw) translateY(0) scaleX(-1)}
+  96%{transform:translateX(4vw) translateY(-10px) scaleX(-1)}
+  99%{transform:translateX(4vw) translateY(0) scaleX(-1)}
+  100%{transform:translateX(4vw) translateY(0) scaleX(1)}
+}
+@keyframes mascotWalkMobile{
+  0%{transform:translateX(3vw) translateY(0) scaleX(1)}
+  15%{transform:translateX(21vw) translateY(-7px) scaleX(1)}
+  30%{transform:translateX(39vw) translateY(0) scaleX(1)}
+  44%{transform:translateX(58vw) translateY(-7px) scaleX(1)}
+  48%{transform:translateX(58vw) translateY(0) scaleX(1)}
+  50%{transform:translateX(58vw) translateY(0) scaleX(-1)}
+  65%{transform:translateX(40vw) translateY(-7px) scaleX(-1)}
+  80%{transform:translateX(21vw) translateY(0) scaleX(-1)}
+  96%{transform:translateX(3vw) translateY(-7px) scaleX(-1)}
+  99%{transform:translateX(3vw) translateY(0) scaleX(-1)}
+  100%{transform:translateX(3vw) translateY(0) scaleX(1)}
 }
 @media(max-width:1024px){.hero__mascot{height:min(24vh,220px);opacity:.88}}
 @media(max-width:680px){
@@ -187,8 +207,8 @@ a:focus-visible,
   .hero__inner{margin-top:-128px}
   .hero__actions .btn--ghost{display:none}
   .hero__mascot{
-    display:block;height:96px;z-index:3;opacity:.95;
-    animation:mascotMobileRoam 16s var(--ease) infinite;
+    display:block;height:86px;z-index:3;opacity:.95;bottom:19vh;top:auto;
+    animation:mascotWalkMobile 18s linear infinite;
   }
   .hero__mascot.is-following{
     position:fixed;top:58%;right:10px;left:auto;height:72px;z-index:80;
