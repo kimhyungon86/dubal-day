@@ -693,9 +693,14 @@ a:focus-visible,
   background:var(--g-700);color:#fff;padding:14px 18px;border-radius:16px;
   box-shadow:var(--shadow-lg);font-weight:700;
 }
-.sticky-cta b{color:var(--lime)}
-.sticky-cta__btn{background:var(--g-500);padding:.5em 1em;border-radius:999px;font-weight:800;flex:0 0 auto}
+.sticky-cta b{color:#fff;display:block;font-size:.82rem;opacity:.9;font-weight:700}
+.sticky-cta__txt{display:flex;flex-direction:column;gap:2px;line-height:1.25}
+.sticky-cta__txt small{font-size:1.05rem;font-weight:900;color:var(--gold)}
+.sticky-cta__txt em{font-style:normal;color:#fff;background:var(--gold);color:var(--g-900);padding:0 .3em;border-radius:5px}
+.sticky-cta__btn{background:var(--g-500);padding:.6em 1.1em;border-radius:999px;font-weight:900;flex:0 0 auto;box-shadow:0 4px 0 var(--g-800);animation:stickyPulse 1.6s ease-in-out infinite}
+@keyframes stickyPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 @media(max-width:720px){.sticky-cta{display:flex}body{padding-bottom:80px}}
+@media(prefers-reduced-motion:reduce){.sticky-cta__btn{animation:none}}
 
 /* ---- REVEAL ANIMATION ---- */
 /* 기본은 항상 보임(SEO·프린트·크롤러 안전). JS가 있을 때만 등장 애니메이션 */
