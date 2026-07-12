@@ -174,42 +174,42 @@ a:focus-visible,
 /* 뒤뚱뒤뚱 자연스러운 걷기: 걸음마다 작은 상하 + 좌우 기우뚱 */
 @keyframes mascotWalk{
   0%{transform:translateX(4vw) translateY(0) rotate(0deg) scaleX(1)}
-  5%{transform:translateX(11vw) translateY(-5px) rotate(2.5deg) scaleX(1)}
+  5%{transform:translateX(11vw) translateY(-9px) rotate(6deg) scaleX(1)}
   10%{transform:translateX(19vw) translateY(0) rotate(0deg) scaleX(1)}
-  15%{transform:translateX(26vw) translateY(-5px) rotate(-2.5deg) scaleX(1)}
+  15%{transform:translateX(26vw) translateY(-9px) rotate(-6deg) scaleX(1)}
   20%{transform:translateX(34vw) translateY(0) rotate(0deg) scaleX(1)}
-  25%{transform:translateX(41vw) translateY(-5px) rotate(2.5deg) scaleX(1)}
+  25%{transform:translateX(41vw) translateY(-9px) rotate(6deg) scaleX(1)}
   30%{transform:translateX(48vw) translateY(0) rotate(0deg) scaleX(1)}
-  35%{transform:translateX(55vw) translateY(-5px) rotate(-2.5deg) scaleX(1)}
+  35%{transform:translateX(55vw) translateY(-9px) rotate(-6deg) scaleX(1)}
   40%{transform:translateX(62vw) translateY(0) rotate(0deg) scaleX(1)}
-  45%{transform:translateX(71vw) translateY(-5px) rotate(2.5deg) scaleX(1)}
+  45%{transform:translateX(71vw) translateY(-9px) rotate(6deg) scaleX(1)}
   48%{transform:translateX(71vw) translateY(0) rotate(0deg) scaleX(1)}
   50%{transform:translateX(71vw) translateY(0) rotate(0deg) scaleX(-1)}
-  55%{transform:translateX(64vw) translateY(-5px) rotate(2.5deg) scaleX(-1)}
+  55%{transform:translateX(64vw) translateY(-9px) rotate(6deg) scaleX(-1)}
   60%{transform:translateX(56vw) translateY(0) rotate(0deg) scaleX(-1)}
-  65%{transform:translateX(49vw) translateY(-5px) rotate(-2.5deg) scaleX(-1)}
+  65%{transform:translateX(49vw) translateY(-9px) rotate(-6deg) scaleX(-1)}
   70%{transform:translateX(42vw) translateY(0) rotate(0deg) scaleX(-1)}
-  75%{transform:translateX(35vw) translateY(-5px) rotate(2.5deg) scaleX(-1)}
+  75%{transform:translateX(35vw) translateY(-9px) rotate(6deg) scaleX(-1)}
   80%{transform:translateX(27vw) translateY(0) rotate(0deg) scaleX(-1)}
-  85%{transform:translateX(20vw) translateY(-5px) rotate(-2.5deg) scaleX(-1)}
+  85%{transform:translateX(20vw) translateY(-9px) rotate(-6deg) scaleX(-1)}
   90%{transform:translateX(12vw) translateY(0) rotate(0deg) scaleX(-1)}
-  96%{transform:translateX(4vw) translateY(-5px) rotate(2.5deg) scaleX(-1)}
+  96%{transform:translateX(4vw) translateY(-9px) rotate(6deg) scaleX(-1)}
   100%{transform:translateX(4vw) translateY(0) rotate(0deg) scaleX(1)}
 }
 @keyframes mascotWalkMobile{
   0%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
-  8%{transform:translateX(13vw) translateY(-5px) rotate(3deg) scaleX(1)}
+  8%{transform:translateX(13vw) translateY(-9px) rotate(6deg) scaleX(1)}
   16%{transform:translateX(23vw) translateY(0) rotate(0deg) scaleX(1)}
-  24%{transform:translateX(33vw) translateY(-5px) rotate(-3deg) scaleX(1)}
+  24%{transform:translateX(33vw) translateY(-9px) rotate(-6deg) scaleX(1)}
   32%{transform:translateX(43vw) translateY(0) rotate(0deg) scaleX(1)}
-  40%{transform:translateX(53vw) translateY(-5px) rotate(3deg) scaleX(1)}
+  40%{transform:translateX(53vw) translateY(-9px) rotate(6deg) scaleX(1)}
   46%{transform:translateX(58vw) translateY(0) rotate(0deg) scaleX(1)}
   50%{transform:translateX(58vw) translateY(0) rotate(0deg) scaleX(-1)}
-  58%{transform:translateX(46vw) translateY(-5px) rotate(3deg) scaleX(-1)}
+  58%{transform:translateX(46vw) translateY(-9px) rotate(6deg) scaleX(-1)}
   66%{transform:translateX(36vw) translateY(0) rotate(0deg) scaleX(-1)}
-  74%{transform:translateX(26vw) translateY(-5px) rotate(-3deg) scaleX(-1)}
+  74%{transform:translateX(26vw) translateY(-9px) rotate(-6deg) scaleX(-1)}
   82%{transform:translateX(16vw) translateY(0) rotate(0deg) scaleX(-1)}
-  96%{transform:translateX(3vw) translateY(-5px) rotate(3deg) scaleX(-1)}
+  96%{transform:translateX(3vw) translateY(-9px) rotate(6deg) scaleX(-1)}
   100%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
 }
 @media(max-width:1024px){.hero__mascot{height:min(24vh,220px);opacity:.88}}
@@ -223,7 +223,7 @@ a:focus-visible,
   }
   .hero__mascot.is-following{
     position:fixed;bottom:74px;top:auto;right:auto;left:0;height:110px;z-index:80;
-    animation:mascotFollowWalk 8s linear infinite;
+    animation:mascotFollowWalk 11s linear infinite;
   }
   .hero__joinflow{bottom:88px;width:calc(100% - 28px);padding:7px 12px;border-radius:18px}
   .hero__joinflow-head{flex-direction:column;gap:5px}
@@ -245,18 +245,18 @@ a:focus-visible,
 }
 @keyframes mascotFollowWalk{
   0%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
-  8%{transform:translateX(14vw) translateY(-6px) rotate(3deg) scaleX(1)}
+  8%{transform:translateX(14vw) translateY(-10px) rotate(6deg) scaleX(1)}
   16%{transform:translateX(25vw) translateY(0) rotate(0deg) scaleX(1)}
-  24%{transform:translateX(36vw) translateY(-6px) rotate(-3deg) scaleX(1)}
+  24%{transform:translateX(36vw) translateY(-10px) rotate(-6deg) scaleX(1)}
   32%{transform:translateX(47vw) translateY(0) rotate(0deg) scaleX(1)}
-  40%{transform:translateX(58vw) translateY(-6px) rotate(3deg) scaleX(1)}
+  40%{transform:translateX(58vw) translateY(-10px) rotate(6deg) scaleX(1)}
   46%{transform:translateX(60vw) translateY(0) rotate(0deg) scaleX(1)}
   50%{transform:translateX(60vw) translateY(0) rotate(0deg) scaleX(-1)}
-  58%{transform:translateX(49vw) translateY(-6px) rotate(3deg) scaleX(-1)}
+  58%{transform:translateX(49vw) translateY(-10px) rotate(6deg) scaleX(-1)}
   66%{transform:translateX(38vw) translateY(0) rotate(0deg) scaleX(-1)}
-  74%{transform:translateX(27vw) translateY(-6px) rotate(-3deg) scaleX(-1)}
+  74%{transform:translateX(27vw) translateY(-10px) rotate(-6deg) scaleX(-1)}
   82%{transform:translateX(16vw) translateY(0) rotate(0deg) scaleX(-1)}
-  96%{transform:translateX(3vw) translateY(-6px) rotate(3deg) scaleX(-1)}
+  96%{transform:translateX(3vw) translateY(-10px) rotate(6deg) scaleX(-1)}
   100%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
 }
 .hero__scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:2px solid rgba(255,255,255,.6);border-radius:14px;z-index:2}
@@ -294,7 +294,7 @@ a:focus-visible,
 .about{background:var(--paper)}
 .info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:40px 0 26px}
 .info-card{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;transition:transform .25s var(--ease),box-shadow .25s}
-.info-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.info-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-md)}
 .info-card__ico{font-size:2rem;display:block;margin-bottom:10px}
 .info-card h3{font-size:.92rem;color:var(--g-600);font-weight:800;margin-bottom:6px}
 .info-card p{font-weight:600;line-height:1.5}
@@ -326,7 +326,7 @@ a:focus-visible,
 .jma-stats span{color:var(--muted);font-weight:600;font-size:.92rem;margin-top:8px;display:block}
 .mission-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;text-align:left}
 .mcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease)}
-.mcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.mcard:hover{transform:translateY(-9px);box-shadow:var(--shadow-md)}
 .mico{font-size:2rem}
 .mcard b{display:block;font-size:1.25rem;font-weight:800;margin:10px 0 6px}
 .mcard p{color:var(--muted);line-height:1.65}
@@ -451,7 +451,7 @@ a:focus-visible,
 .enjoy__head .h2{margin:0}
 .enjoy__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .ecard{background:var(--paper);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);border-bottom:4px solid var(--g-500);transition:transform .25s var(--ease),box-shadow .25s}
-.ecard:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.ecard:hover{transform:translateY(-10px);box-shadow:var(--shadow-md)}
 .ecard img{width:100%;height:180px;object-fit:cover}
 .ecard__duo{display:grid;grid-template-columns:1fr 1fr;gap:2px}
 .ecard__duo img{width:100%;height:180px;object-fit:cover;display:block}
@@ -570,7 +570,7 @@ a:focus-visible,
   box-shadow:0 10px 28px rgba(9,60,26,.08);
   transition:transform .22s var(--ease),box-shadow .22s var(--ease),border-color .22s var(--ease);
 }
-.sponsor-logo-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:rgba(31,191,87,.45)}
+.sponsor-logo-card:hover{transform:translateY(-9px);box-shadow:var(--shadow-md);border-color:rgba(31,191,87,.45)}
 .sponsor-logo-card img{width:auto;max-width:min(168px,86%);height:58px;object-fit:contain}
 .sponsor-logo-card--alpinestars img{height:44px;max-width:min(180px,88%)}
 .sponsor-logo-card--husqvarna img,
@@ -636,7 +636,7 @@ a:focus-visible,
 .firsttime{background:linear-gradient(180deg,var(--cream),#eef7ea);text-align:center}
 .ft-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:40px 0 30px}
 .ft-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 22px;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease)}
-.ft-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.ft-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-md)}
 .ft-ico{font-size:2.2rem;display:block;margin-bottom:12px}
 .ft-card b{display:block;font-size:1.12rem;font-weight:800;margin-bottom:6px}
 .ft-card p{color:var(--muted);font-size:.92rem;line-height:1.5}
