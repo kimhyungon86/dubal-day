@@ -28,10 +28,8 @@
   /* ---- 1-2. 마스코트 걷기 프레임 순환(발 번갈아 딛기) ---- */
   if (heroMascot) {
     const walkFrames = [
-      'assets/3d/mascot_walk_a.png',
-      'assets/3d/mascot_walk_b.png',
-      'assets/3d/mascot_walk_a.png',
-      'assets/3d/mascot_walk_c.png',
+      'assets/3d/walk_side_1.png',
+      'assets/3d/walk_side_2.png',
     ];
     walkFrames.forEach((s) => { const im = new Image(); im.src = s; }); // 프리로드
     let wf = 0;
@@ -40,7 +38,7 @@
       setInterval(() => {
         wf = (wf + 1) % walkFrames.length;
         heroMascot.src = walkFrames[wf];
-      }, 210);
+      }, 260);
     }
   }
 
