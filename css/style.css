@@ -168,7 +168,12 @@ a:focus-visible,
 .hero__joinflow p{display:none}
 .joinflow__cta{display:none;align-items:center;justify-content:center;min-height:40px;padding:.62em 1.05em;border-radius:999px;background:var(--lime);color:var(--g-900);font-size:.92rem;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.18)}
 .joinflow__cta:hover{transform:translateY(-1px)}
-.hero__mascot{position:absolute;left:0;bottom:6vh;top:auto;height:min(26vh,230px);z-index:2;pointer-events:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.45));will-change:transform}
+.hero__mascot{position:absolute;left:0;bottom:6vh;top:auto;height:min(26vh,230px);width:min(20vh,175px);z-index:2;pointer-events:none;will-change:transform}
+.hero__mascot .mfr{position:absolute;bottom:0;left:50%;height:100%;width:auto;transform:translateX(-50%);filter:drop-shadow(0 14px 30px rgba(0,0,0,.45))}
+.hero__mascot .mfr--a{animation:walkCrossA .58s ease-in-out infinite}
+.hero__mascot .mfr--b{animation:walkCrossB .58s ease-in-out infinite}
+@keyframes walkCrossA{0%,38%{opacity:1}62%,100%{opacity:0}}
+@keyframes walkCrossB{0%,38%{opacity:0}62%,100%{opacity:1}}
 .hero__mascot--roamer{animation:mascotWalk 22s linear infinite}
 /* 좌우로 통통 걸어다니고, 끝에서 몸을 반대로 돌린다(scaleX) */
 /* 뒤뚱뒤뚱 자연스러운 걷기: 걸음마다 작은 상하 + 좌우 기우뚱 */
@@ -738,7 +743,8 @@ html.js [class~="reveal"].is-inview{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .reveal,html.js [class~="reveal"]{opacity:1;transform:none;transition:none}
   .hero__video{display:none}
-  .marquee__track,.hero__scroll span,.hero__mascot,.hero__mascot--roamer,.spk,.btn--cta,.hero__round,.tl--now .tl-dot{animation:none!important}
+  .marquee__track,.hero__scroll span,.hero__mascot,.hero__mascot--roamer,.mfr,.mfr--a,.mfr--b,.spk,.btn--cta,.hero__round,.tl--now .tl-dot{animation:none!important}
+  .mfr--b{opacity:0}
   .btn--cta:hover,.mcard:hover,.ecard:hover,.info-card:hover,.tl-body:hover{transform:none}
   .promo__card,.promo__mascot,.promo__amount{animation:none!important}
 }

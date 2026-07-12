@@ -25,22 +25,7 @@
   window.addEventListener('resize', toggleMascotFollow);
   toggleMascotFollow();
 
-  /* ---- 1-2. 마스코트 걷기 프레임 순환(발 번갈아 딛기) ---- */
-  if (heroMascot) {
-    const walkFrames = [
-      'assets/3d/walk_side_1.png',
-      'assets/3d/walk_side_2.png',
-    ];
-    walkFrames.forEach((s) => { const im = new Image(); im.src = s; }); // 프리로드
-    let wf = 0;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduce) {
-      setInterval(() => {
-        wf = (wf + 1) % walkFrames.length;
-        heroMascot.src = walkFrames[wf];
-      }, 260);
-    }
-  }
+  /* 마스코트 걷기 프레임은 CSS crossfade(.mfr)로 처리 */
 
   /* ---- 2. 숫자 카운터 ---- */
   function animateCount(el) {
