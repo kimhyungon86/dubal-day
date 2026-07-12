@@ -171,35 +171,46 @@ a:focus-visible,
 .hero__mascot{position:absolute;left:0;bottom:6vh;top:auto;height:min(26vh,230px);z-index:2;pointer-events:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.45));will-change:transform}
 .hero__mascot--roamer{animation:mascotWalk 22s linear infinite}
 /* 좌우로 통통 걸어다니고, 끝에서 몸을 반대로 돌린다(scaleX) */
+/* 뒤뚱뒤뚱 자연스러운 걷기: 걸음마다 작은 상하 + 좌우 기우뚱 */
 @keyframes mascotWalk{
-  0%{transform:translateX(4vw) translateY(0) scaleX(1)}
-  10%{transform:translateX(19vw) translateY(-10px) scaleX(1)}
-  20%{transform:translateX(34vw) translateY(0) scaleX(1)}
-  30%{transform:translateX(48vw) translateY(-10px) scaleX(1)}
-  40%{transform:translateX(62vw) translateY(0) scaleX(1)}
-  46%{transform:translateX(71vw) translateY(-10px) scaleX(1)}
-  49%{transform:translateX(71vw) translateY(0) scaleX(1)}
-  50%{transform:translateX(71vw) translateY(0) scaleX(-1)}
-  60%{transform:translateX(56vw) translateY(-10px) scaleX(-1)}
-  70%{transform:translateX(42vw) translateY(0) scaleX(-1)}
-  80%{transform:translateX(27vw) translateY(-10px) scaleX(-1)}
-  90%{transform:translateX(12vw) translateY(0) scaleX(-1)}
-  96%{transform:translateX(4vw) translateY(-10px) scaleX(-1)}
-  99%{transform:translateX(4vw) translateY(0) scaleX(-1)}
-  100%{transform:translateX(4vw) translateY(0) scaleX(1)}
+  0%{transform:translateX(4vw) translateY(0) rotate(0deg) scaleX(1)}
+  5%{transform:translateX(11vw) translateY(-5px) rotate(2.5deg) scaleX(1)}
+  10%{transform:translateX(19vw) translateY(0) rotate(0deg) scaleX(1)}
+  15%{transform:translateX(26vw) translateY(-5px) rotate(-2.5deg) scaleX(1)}
+  20%{transform:translateX(34vw) translateY(0) rotate(0deg) scaleX(1)}
+  25%{transform:translateX(41vw) translateY(-5px) rotate(2.5deg) scaleX(1)}
+  30%{transform:translateX(48vw) translateY(0) rotate(0deg) scaleX(1)}
+  35%{transform:translateX(55vw) translateY(-5px) rotate(-2.5deg) scaleX(1)}
+  40%{transform:translateX(62vw) translateY(0) rotate(0deg) scaleX(1)}
+  45%{transform:translateX(71vw) translateY(-5px) rotate(2.5deg) scaleX(1)}
+  48%{transform:translateX(71vw) translateY(0) rotate(0deg) scaleX(1)}
+  50%{transform:translateX(71vw) translateY(0) rotate(0deg) scaleX(-1)}
+  55%{transform:translateX(64vw) translateY(-5px) rotate(2.5deg) scaleX(-1)}
+  60%{transform:translateX(56vw) translateY(0) rotate(0deg) scaleX(-1)}
+  65%{transform:translateX(49vw) translateY(-5px) rotate(-2.5deg) scaleX(-1)}
+  70%{transform:translateX(42vw) translateY(0) rotate(0deg) scaleX(-1)}
+  75%{transform:translateX(35vw) translateY(-5px) rotate(2.5deg) scaleX(-1)}
+  80%{transform:translateX(27vw) translateY(0) rotate(0deg) scaleX(-1)}
+  85%{transform:translateX(20vw) translateY(-5px) rotate(-2.5deg) scaleX(-1)}
+  90%{transform:translateX(12vw) translateY(0) rotate(0deg) scaleX(-1)}
+  96%{transform:translateX(4vw) translateY(-5px) rotate(2.5deg) scaleX(-1)}
+  100%{transform:translateX(4vw) translateY(0) rotate(0deg) scaleX(1)}
 }
 @keyframes mascotWalkMobile{
-  0%{transform:translateX(3vw) translateY(0) scaleX(1)}
-  15%{transform:translateX(21vw) translateY(-7px) scaleX(1)}
-  30%{transform:translateX(39vw) translateY(0) scaleX(1)}
-  44%{transform:translateX(58vw) translateY(-7px) scaleX(1)}
-  48%{transform:translateX(58vw) translateY(0) scaleX(1)}
-  50%{transform:translateX(58vw) translateY(0) scaleX(-1)}
-  65%{transform:translateX(40vw) translateY(-7px) scaleX(-1)}
-  80%{transform:translateX(21vw) translateY(0) scaleX(-1)}
-  96%{transform:translateX(3vw) translateY(-7px) scaleX(-1)}
-  99%{transform:translateX(3vw) translateY(0) scaleX(-1)}
-  100%{transform:translateX(3vw) translateY(0) scaleX(1)}
+  0%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
+  8%{transform:translateX(13vw) translateY(-5px) rotate(3deg) scaleX(1)}
+  16%{transform:translateX(23vw) translateY(0) rotate(0deg) scaleX(1)}
+  24%{transform:translateX(33vw) translateY(-5px) rotate(-3deg) scaleX(1)}
+  32%{transform:translateX(43vw) translateY(0) rotate(0deg) scaleX(1)}
+  40%{transform:translateX(53vw) translateY(-5px) rotate(3deg) scaleX(1)}
+  46%{transform:translateX(58vw) translateY(0) rotate(0deg) scaleX(1)}
+  50%{transform:translateX(58vw) translateY(0) rotate(0deg) scaleX(-1)}
+  58%{transform:translateX(46vw) translateY(-5px) rotate(3deg) scaleX(-1)}
+  66%{transform:translateX(36vw) translateY(0) rotate(0deg) scaleX(-1)}
+  74%{transform:translateX(26vw) translateY(-5px) rotate(-3deg) scaleX(-1)}
+  82%{transform:translateX(16vw) translateY(0) rotate(0deg) scaleX(-1)}
+  96%{transform:translateX(3vw) translateY(-5px) rotate(3deg) scaleX(-1)}
+  100%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
 }
 @media(max-width:1024px){.hero__mascot{height:min(24vh,220px);opacity:.88}}
 @media(max-width:680px){
@@ -233,17 +244,20 @@ a:focus-visible,
   92%{opacity:0;transform:translate3d(20px,19vh,0) rotate(4deg)}
 }
 @keyframes mascotFollowWalk{
-  0%{transform:translateX(3vw) translateY(0) scaleX(1)}
-  12%{transform:translateX(18vw) translateY(-11px) scaleX(1)}
-  24%{transform:translateX(33vw) translateY(0) scaleX(1)}
-  36%{transform:translateX(48vw) translateY(-11px) scaleX(1)}
-  46%{transform:translateX(60vw) translateY(0) scaleX(1)}
-  50%{transform:translateX(60vw) translateY(0) scaleX(-1)}
-  62%{transform:translateX(45vw) translateY(-11px) scaleX(-1)}
-  74%{transform:translateX(30vw) translateY(0) scaleX(-1)}
-  86%{transform:translateX(15vw) translateY(-11px) scaleX(-1)}
-  96%{transform:translateX(3vw) translateY(0) scaleX(-1)}
-  100%{transform:translateX(3vw) translateY(0) scaleX(1)}
+  0%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
+  8%{transform:translateX(14vw) translateY(-6px) rotate(3deg) scaleX(1)}
+  16%{transform:translateX(25vw) translateY(0) rotate(0deg) scaleX(1)}
+  24%{transform:translateX(36vw) translateY(-6px) rotate(-3deg) scaleX(1)}
+  32%{transform:translateX(47vw) translateY(0) rotate(0deg) scaleX(1)}
+  40%{transform:translateX(58vw) translateY(-6px) rotate(3deg) scaleX(1)}
+  46%{transform:translateX(60vw) translateY(0) rotate(0deg) scaleX(1)}
+  50%{transform:translateX(60vw) translateY(0) rotate(0deg) scaleX(-1)}
+  58%{transform:translateX(49vw) translateY(-6px) rotate(3deg) scaleX(-1)}
+  66%{transform:translateX(38vw) translateY(0) rotate(0deg) scaleX(-1)}
+  74%{transform:translateX(27vw) translateY(-6px) rotate(-3deg) scaleX(-1)}
+  82%{transform:translateX(16vw) translateY(0) rotate(0deg) scaleX(-1)}
+  96%{transform:translateX(3vw) translateY(-6px) rotate(3deg) scaleX(-1)}
+  100%{transform:translateX(3vw) translateY(0) rotate(0deg) scaleX(1)}
 }
 .hero__scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:2px solid rgba(255,255,255,.6);border-radius:14px;z-index:2}
 .hero__scroll span{position:absolute;top:8px;left:50%;width:4px;height:8px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:scrolldot 1.6s var(--ease) infinite}
