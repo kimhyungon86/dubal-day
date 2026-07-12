@@ -1,8 +1,8 @@
 {
-  "pid": 12617,
-  "port": 11939,
-  "token": "99b5ae15-52b2-493a-b72b-7979af265dd6",
-  "startedAt": "2026-07-10T06:08:02.210Z",
+  "pid": 19807,
+  "port": 42292,
+  "token": "088c32a6-248f-4444-b969-e39adbd468d9",
+  "startedAt": "2026-07-12T04:55:03.564Z",
   "serverPath": "/Users/goniru/claude-forge/skills/gstack/browse/src/server.ts",
   "mode": "launched"
 }
