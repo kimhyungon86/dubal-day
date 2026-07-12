@@ -34,17 +34,15 @@ const sponsorNames = [
 const mainSponsorLabels = ['Alpinestars', 'Husqvarna', 'LIQUI MOLY', 'Honda', 'Yamaha', 'Royal Enfield', 'JPX', 'KTM'];
 
 const localPartnerLabels = [
-  '레인조아카데미',
-  '바이크#',
-  '올인원골드',
-  '모터뱅크',
-  '그랜드운전학원',
-  '윤팩토리',
-  '하스이퀍먼트',
-  '데칼팩토리',
-  '알파카라이프',
-  '양푼리',
+  '유로그립 코리아',
+  'WP서스펜션 코리아',
+  '패스트하우스',
   '바이크마트',
+  '바이크 팩토리',
+  '윤 팩토리',
+  '(주)모터뱅크',
+  '바이크 #',
+  '그랜드운전학원',
 ];
 
 const requiredInfo = ['2026', '9', '19', '토', '10', '16', '모터뱅크', '20,000', 'naver.me/x2YoYt5K'];
@@ -91,8 +89,11 @@ assert(files.index.includes('data-participant-updated'), 'index: hero should exp
 assert(!files.index.includes('목표 1100명'), 'index: participant target copy should not be visible in hero');
 assert(!files.index.includes('joinflow__milestones'), 'index: participant milestone schedule should not be shown in hero');
 assert(files.index.includes('hero__mascot--roamer'), 'index: hero mascot should be configured as a roaming mascot');
+assert(files.index.includes('assets/video/mascot-walk-cutout.webp'), 'index: mascot should use transparent walking animation asset');
+assert(fs.existsSync(path.join(root, 'assets/video/mascot-walk.mp4')), 'video asset missing: mascot-walk.mp4');
+assert(fs.existsSync(path.join(root, 'assets/video/mascot-walk-cutout.webp')), 'animation asset missing: mascot-walk-cutout.webp');
 assert(files.css.includes('.hero__joinflow'), 'css: missing hero participant momentum styles');
-assert(files.css.includes('@keyframes mascotRoam'), 'css: missing roaming mascot animation');
+assert(files.css.includes('@keyframes mascotWalk'), 'css: missing roaming mascot animation');
 assert(!/max-width:680px\)\{[^}]*\.hero__mascot\{display:none/.test(files.css), 'css: mobile mascot should remain visible');
 assert(files.css.includes('@keyframes mascotMobileRoam'), 'css: missing mobile roaming mascot animation');
 assert(files.css.includes('hero__mascot.is-following'), 'css: mobile mascot should have sticky follow state');
