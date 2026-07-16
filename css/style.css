@@ -570,6 +570,10 @@ a:focus-visible,
 .sponsor-logo-card--badge b{font-size:3rem;font-weight:900;letter-spacing:.04em;line-height:1;color:#fff;text-shadow:0 3px 0 rgba(4,36,15,.4)}
 .sponsor-logo-card--badge span{color:rgba(255,255,255,.82)}
 .sponsor-logo-card--jpx{background:linear-gradient(145deg,#083b1b,#16b34f)}
+.sponsor-logo-card--dark{background:#141414;border-color:rgba(255,255,255,.16)}
+.sponsor-logo-card--dark span{color:rgba(255,255,255,.85)}
+.sponsor-logo-card--dark img{height:52px}
+.sponsor-logo-card--round img{height:78px;max-width:min(120px,80%);border-radius:50%}
 .local-partner-list{
   list-style:none;
   display:grid;
