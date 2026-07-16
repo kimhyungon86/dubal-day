@@ -711,6 +711,9 @@ html.js [class~="reveal"].is-inview{opacity:1;transform:none}
 .promo__amount i{font-size:1.4rem;font-style:normal;font-weight:800;-webkit-text-fill-color:#ffe98a}
 @keyframes promoGlow{0%,100%{filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}50%{filter:drop-shadow(0 2px 15px rgba(244,196,48,.75))}}
 .promo__sub{font-size:1.12rem;font-weight:800;color:#fff}
+.promo__burst{display:grid;place-items:center;width:150px;height:150px;margin:6px auto 4px;background:radial-gradient(circle at 50% 42%,#fff2b0,#f4c430 66%,#e0a800);clip-path:polygon(50% 0%, 60% 14%, 75% 7%, 76% 24%, 93% 25%, 86% 40%, 100% 50%, 86% 60%, 93% 75%, 76% 76%, 75% 93%, 60% 86%, 50% 100%, 40% 86%, 25% 93%, 24% 76%, 7% 75%, 14% 60%, 0% 50%, 14% 40%, 7% 25%, 24% 24%, 25% 7%, 40% 14%);filter:drop-shadow(0 5px 12px rgba(0,0,0,.4));animation:burstPulse 1.5s ease-in-out infinite}
+.promo__burst b{font-size:2rem;font-weight:900;line-height:1.02;color:var(--g-900);text-align:center;letter-spacing:-.01em;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+@keyframes burstPulse{0%,100%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.07) rotate(4deg)}}
 .promo__desc{font-size:.9rem;line-height:1.6;color:rgba(255,255,255,.82);margin:6px 0 18px}
 .promo__cta{display:block;background:var(--g-500);color:#fff;font-weight:800;font-size:1.1rem;padding:.85em 1em;border-radius:14px;box-shadow:0 6px 0 var(--g-700);transition:transform .15s,box-shadow .15s}
 .promo__cta:hover{transform:translateY(-2px)}
@@ -725,5 +728,5 @@ html.js [class~="reveal"].is-inview{opacity:1;transform:none}
   .marquee__track,.hero__scroll span,.hero__mascot,.hero__mascot--roamer,.mascot-video,.spk,.btn--cta,.hero__round,.tl--now .tl-dot{animation:none!important}
   .mfr--b{opacity:0}
   .btn--cta:hover,.mcard:hover,.ecard:hover,.info-card:hover,.tl-body:hover{transform:none}
-  .promo__card,.promo__mascot,.promo__amount{animation:none!important}
+  .promo__card,.promo__mascot,.promo__amount,.promo__burst{animation:none!important}
 }
