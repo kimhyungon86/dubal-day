@@ -354,8 +354,7 @@ a:focus-visible,
 .prog-list li{display:flex;gap:14px;align-items:flex-start;padding:16px 6px;border-bottom:1px dashed var(--line)}
 .prog-list li:last-child{border-bottom:none}
 .prog-ico{font-size:1.6rem;flex:0 0 auto;width:44px;height:44px;display:grid;place-items:center;background:var(--paper);border-radius:12px;box-shadow:var(--shadow-sm)}
-.prog-ico--img{padding:0;overflow:hidden}
-.prog-ico--img img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.prog-ico--bike img{width:64%;height:64%;object-fit:contain}
 .prog-list b{display:block;font-size:1.05rem;font-weight:800;margin-bottom:2px}
 .prog-list p{color:var(--muted);font-size:.94rem}
 .prog-brand{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
