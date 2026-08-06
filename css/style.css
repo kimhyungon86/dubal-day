@@ -646,6 +646,10 @@ a:focus-visible,
 .apply__facts{list-style:none;margin:22px 0 28px;display:flex;flex-direction:column;gap:10px}
 .apply__facts li{font-size:1.05rem;font-weight:600}
 .apply__facts b{display:inline-block;min-width:64px;color:var(--lime);font-weight:800}
+.apply__urgent{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),#ffe38a);color:var(--g-900);font-weight:900;font-size:1.15rem;padding:13px 24px;border-radius:999px;margin:0 0 24px;box-shadow:0 8px 22px rgba(244,196,48,.5);animation:urgentPulse 1.7s ease-in-out infinite}
+.apply__urgent b{color:#c0392b}
+@keyframes urgentPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@media(prefers-reduced-motion:reduce){.apply__urgent,.promo__urgent{animation:none!important}}
 .apply .btn--primary{background:#fff;color:var(--g-700);box-shadow:0 6px 0 rgba(0,0,0,.18)}
 .apply .btn--primary:hover{background:var(--lime);color:var(--g-800)}
 .qr-card{background:#fff;border-radius:var(--radius-lg);padding:24px;text-align:center;box-shadow:var(--shadow-lg);max-width:360px;margin:0 auto}
@@ -721,6 +725,8 @@ html.js [class~="reveal"].is-inview{opacity:1;transform:none}
 .promo__burst b{font-size:2.05rem;font-weight:900;line-height:1;text-align:center;letter-spacing:-.01em;background:linear-gradient(180deg,#fff6c9,#ffe066 48%,#f4c430);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(0,0,0,.55))}
 @keyframes burstPulse{0%,100%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.07) rotate(4deg)}}
 @keyframes burstSpin{to{transform:rotate(360deg)}}
+.promo__urgent{display:block;background:linear-gradient(135deg,var(--gold),#ffe38a);color:var(--g-900);font-weight:900;font-size:1rem;padding:11px 16px;border-radius:12px;margin:14px 0 8px;box-shadow:0 5px 16px rgba(244,196,48,.45);animation:urgentPulse 1.6s ease-in-out infinite}
+.promo__urgent b{color:#c0392b}
 .promo__desc{font-size:.9rem;line-height:1.6;color:rgba(255,255,255,.82);margin:6px 0 18px}
 .promo__cta{display:block;background:var(--g-500);color:#fff;font-weight:800;font-size:1.1rem;padding:.85em 1em;border-radius:14px;box-shadow:0 6px 0 var(--g-700);transition:transform .15s,box-shadow .15s}
 .promo__cta:hover{transform:translateY(-2px)}
