@@ -277,7 +277,7 @@ a:focus-visible,
 .h2 .hl{color:var(--g-600);position:relative;white-space:nowrap}
 .h2 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.34em;background:var(--lime);opacity:.55;z-index:-1;border-radius:4px}
 .lead{font-size:clamp(1rem,2.3vw,1.18rem);color:var(--muted);max-width:640px;line-height:1.75}
-.lead--center{margin-left:auto;margin-right:auto;text-align:center}
+.lead--center{margin-left:auto;margin-right:auto;text-align:center;word-break:keep-all}
 
 /* ---- ABOUT ---- */
 .about{background:var(--paper)}
