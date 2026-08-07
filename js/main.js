@@ -166,9 +166,17 @@
     const participantEls = document.querySelectorAll('[data-participant-current]');
     if (!participantEls.length) return;
     const now = getKstNow();
-    const projected = getProjectedParticipants(now).toLocaleString('ko-KR');
+    const projectedNum = getProjectedParticipants(now);
+    const projected = projectedNum.toLocaleString('ko-KR');
     participantEls.forEach((el) => {
       el.textContent = projected;
+    });
+
+    // 1,200명 목표 진행바 채움
+    const goal = 1200;
+    const pct = Math.min(100, Math.round((projectedNum / goal) * 100));
+    document.querySelectorAll('[data-participant-fill]').forEach((el) => {
+      el.style.width = pct + '%';
     });
 
     const updated = document.querySelector('[data-participant-updated]');
