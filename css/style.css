@@ -685,6 +685,8 @@ a:focus-visible,
 .apply .h2 .hl{color:#fff}
 .apply .h2 .hl::after{background:var(--orange);opacity:.7}
 .apply .lead{color:rgba(255,255,255,.9)}
+.apply__social{color:rgba(255,255,255,.95);font-weight:700;margin:0 0 16px;line-height:1.65;word-break:keep-all}
+.apply__social b{color:var(--lime);font-weight:900}
 .apply__facts{list-style:none;margin:22px 0 28px;display:flex;flex-direction:column;gap:10px}
 .apply__facts li{font-size:1.05rem;font-weight:600}
 .apply__facts b{display:inline-block;min-width:64px;color:var(--lime);font-weight:800}
