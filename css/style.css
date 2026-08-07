@@ -349,6 +349,7 @@ a:focus-visible,
 
 /* ---- PROGRAM ---- */
 .program{background:var(--paper)}
+.prog-note{margin-top:12px;font-size:.9rem;color:var(--muted)}
 .prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:40px 0 28px}
 .prog-col{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
 .prog-col__head{display:flex;align-items:baseline;justify-content:space-between;padding:20px 26px;color:#fff}
