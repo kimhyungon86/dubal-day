@@ -172,8 +172,8 @@
       el.textContent = projected;
     });
 
-    // 1,200명 목표 진행바 채움
-    const goal = 1200;
+    // 1,000명 목표 진행바 채움
+    const goal = 1000;
     const pct = Math.min(100, Math.round((projectedNum / goal) * 100));
     document.querySelectorAll('[data-participant-fill]').forEach((el) => {
       el.style.width = pct + '%';
