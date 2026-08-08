@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>두발인의 날 이벤트 팝업 룰렛 샘플</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root{--g-950:#021207;--g-900:#04240f;--g-800:#06391a;--g-700:#0b7a37;--g-500:#1fbf57;--gold:#f4c430;--lime:#c7f284;--orange:#ff6b2c;--ink:#071b10}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Pretendard,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#052015;color:#fff;overflow-x:hidden}
+button,a{font:inherit}
+.page-bg{position:fixed;inset:0;background:linear-gradient(rgba(3,21,9,.72),rgba(3,21,9,.8)),url("assets/3d/scene_prize.png") center/cover no-repeat;filter:blur(7px) saturate(.92);transform:scale(1.04);opacity:.95}
+.overlay{position:relative;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 50% 8%,rgba(199,242,132,.22),transparent 34%),rgba(3,21,9,.54)}
+.modal{position:relative;width:min(520px,94vw);max-height:94vh;display:flex;flex-direction:column;gap:14px;overflow:auto;padding:20px;border-radius:30px;background:linear-gradient(165deg,#0b7a37,#06391a 48%,#031a0b);border:2px solid var(--gold);box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 42px rgba(244,196,48,.34),0 24px 80px rgba(0,0,0,.58);margin:auto}
+.modal::before{content:"";position:absolute;inset:-45%;background:conic-gradient(from 90deg,transparent,rgba(244,196,48,.14),transparent,rgba(199,242,132,.14),transparent);animation:bgSpin 10s linear infinite;pointer-events:none}
+.modal>*{position:relative;z-index:1}
+@keyframes bgSpin{to{transform:rotate(1turn)}}
+.close{position:absolute;right:14px;top:14px;z-index:3;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.72);background:rgba(255,255,255,.12);color:#fff;font-size:1.3rem;cursor:pointer}
+.sound-toggle{position:absolute;right:14px;top:60px;z-index:3;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.54);background:rgba(3,21,9,.42);color:#fff;font-size:1.05rem;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.event-side{display:flex;flex-direction:column;justify-content:center;gap:12px;min-width:0}
+.ribbon{align-self:center;display:inline-flex;align-items:center;justify-content:center;gap:6px;max-width:calc(100% - 56px);padding:.55em 1.15em;border-radius:999px;background:var(--gold);color:#3a2600;font-size:.82rem;font-weight:950;box-shadow:0 5px 0 rgba(0,0,0,.2),0 0 22px rgba(244,196,48,.38);white-space:normal;text-align:center;line-height:1.2}
+.hero-img{position:relative;margin:0;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.hero-img img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.gift-float{position:absolute;width:54px;height:46px;border-radius:8px;background:linear-gradient(135deg,#ff3f57,#b7062f);right:11%;bottom:12%;box-shadow:0 10px 20px rgba(0,0,0,.28),0 0 18px rgba(244,196,48,.38);animation:giftFloat 2.2s ease-in-out infinite}
+.gift-float::before{content:"";position:absolute;left:50%;top:0;width:12px;height:100%;transform:translateX(-50%);background:linear-gradient(#ffe76a,#f4c430)}
+.gift-float::after{content:"";position:absolute;left:-5px;right:-5px;top:-12px;height:16px;border-radius:7px;background:linear-gradient(135deg,#ff6174,#d30b38);box-shadow:inset 0 0 0 4px rgba(244,196,48,.9)}
+.gift-spark{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(244,196,48,.95)}
+.gift-spark--a{right:23%;bottom:33%;animation:sparkBlink 1.5s ease-in-out infinite}
+.gift-spark--b{right:7%;bottom:27%;animation:sparkBlink 1.5s .38s ease-in-out infinite}
+.gift-spark--c{right:19%;bottom:7%;animation:sparkBlink 1.5s .72s ease-in-out infinite}
+@keyframes giftFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+@keyframes sparkBlink{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.25)}}
+.headline{text-align:center}
+.headline h1{margin:2px 0 8px;font-size:clamp(1.72rem,7vw,2.4rem);line-height:1.04;font-weight:950;letter-spacing:0}
+.headline h1 span{color:var(--gold);text-shadow:0 0 22px rgba(244,196,48,.56)}
+.headline h2{margin:0;font-size:1.15rem}
+.star{width:112px;height:112px;margin:0 auto 4px;display:grid;place-items:center;background:var(--gold);color:#fff6ba;font-size:1.12rem;font-weight:950;text-align:center;line-height:1.1;text-shadow:0 3px 0 rgba(93,60,0,.35);clip-path:polygon(50% 0%,59% 25%,85% 15%,75% 41%,100% 50%,75% 59%,85% 85%,59% 75%,50% 100%,41% 75%,15% 85%,25% 59%,0% 50%,25% 41%,15% 15%,41% 25%);filter:drop-shadow(0 0 18px rgba(244,196,48,.42));animation:starPulse 1.7s ease-in-out infinite}
+@keyframes starPulse{50%{transform:scale(1.06);filter:drop-shadow(0 0 30px rgba(244,196,48,.7))}}
+.event-copy{margin:0;text-align:center;color:rgba(255,255,255,.82);font-size:.94rem;font-weight:750;line-height:1.55;word-break:keep-all}
+.early{display:flex;align-items:center;justify-content:center;gap:7px;padding:.9em 1em;border-radius:14px;background:linear-gradient(180deg,#fff5a8,#ffd45a);color:#5c3900;font-weight:950;box-shadow:0 7px 0 rgba(96,58,0,.22),0 0 24px rgba(244,196,48,.36)}
+.roulette-side{padding:14px;border-radius:24px;background:rgba(3,21,9,.72);border:1px solid rgba(199,242,132,.38);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 0 34px rgba(31,191,87,.22);min-width:0}
+.roulette-head{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px;padding-right:58px}
+.roulette-head span{display:block;color:var(--lime);font-size:.78rem;font-weight:950;letter-spacing:.12em}
+.roulette-head b{font-size:1.1rem;font-weight:950;line-height:1.2}
+.stage{position:relative;display:grid;place-items:center;width:min(318px,82vw);aspect-ratio:1;margin:2px auto 0}
+.pointer{position:absolute;top:-5px;left:50%;z-index:4;width:0;height:0;transform:translateX(-50%);border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid var(--orange);filter:drop-shadow(0 6px 8px rgba(0,0,0,.48))}
+.wheel{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from -45deg,#f4c430 0 90deg,#e7eee9 90deg 180deg,#1fbf57 180deg 270deg,#c7f284 270deg 360deg);border:9px solid rgba(255,255,255,.95);box-shadow:0 0 0 4px rgba(244,196,48,.44),0 0 36px rgba(244,196,48,.35),0 22px 46px rgba(0,0,0,.42);transition:transform 4.8s cubic-bezier(.08,.76,.12,1);overflow:hidden}
+.wheel::after{content:"";position:absolute;inset:30%;z-index:3;border-radius:50%;background:radial-gradient(circle,#062b13,#031b0b 72%);box-shadow:inset 0 0 24px rgba(199,242,132,.22),0 0 18px rgba(0,0,0,.22)}
+.wheel__item{--angle:calc(var(--i) * 90deg);position:absolute;left:50%;top:50%;z-index:2;width:116px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(91px) rotate(calc(-1 * var(--angle) - var(--wheel-rot,0deg)));transform-origin:center;color:#fff;font-size:.92rem;font-weight:950;text-align:center;text-shadow:0 2px 5px rgba(0,0,0,.72);white-space:normal}
+.wheel__item img{width:76px;height:58px;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3)) saturate(1.08) contrast(1.08)}
+.wheel__emoji{display:grid;place-items:center;width:76px;height:58px;font-size:2.8rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.28))}
+.wheel__item small{display:block;max-width:106px;padding:3px 7px;border-radius:999px;background:rgba(2,18,7,.76);box-shadow:0 2px 8px rgba(0,0,0,.24);line-height:1.08;word-break:keep-all}
+.start{position:relative;z-index:6;width:102px;height:102px;border:none;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff8c7,var(--gold) 48%,#c98700);color:#3a2600;font-size:.96rem;font-weight:950;letter-spacing:-.01em;box-shadow:0 9px 0 #7b4f00,0 0 30px rgba(244,196,48,.72);cursor:pointer;transition:transform .18s,filter .18s}
+.start:hover{transform:translateY(-2px) scale(1.04);filter:brightness(1.08)}
+.start:active{transform:translateY(5px);box-shadow:0 4px 0 #7b4f00,0 0 22px rgba(244,196,48,.58)}
+.start:disabled{cursor:wait;filter:saturate(.86);transform:none}
+.result{display:grid;grid-template-columns:86px 1fr;grid-template-areas:"img rank" "img name" "msg msg";gap:4px 16px;align-items:center;margin-top:14px;padding:18px;border-radius:20px;background:rgba(4,36,15,.82);border:1px solid rgba(199,242,132,.28);text-align:left}
+.result img{grid-area:img;width:86px;height:86px;object-fit:contain;border-radius:18px;background:#fff;filter:drop-shadow(0 4px 10px rgba(0,0,0,.24))}
+.result-emoji{grid-area:img;display:grid;place-items:center;width:86px;height:86px;border-radius:18px;background:rgba(255,255,255,.1);font-size:3.2rem}
+.result-emoji[hidden]{display:none}
+.result [data-roulette-rank]{grid-area:rank;color:var(--lime);font-size:1rem;font-weight:950;letter-spacing:.08em}
+.result b{grid-area:name;font-size:1.34rem;font-weight:950;line-height:1.14}
+.result p{grid-area:msg;margin:11px 0 0;color:rgba(255,255,255,.82);font-size:.94rem;font-weight:780;line-height:1.5;word-break:keep-all}
+.roulette-side.is-win .result{border-color:rgba(244,196,48,.78);box-shadow:0 0 26px rgba(244,196,48,.3)}
+.roulette-side.is-lose .result{border-color:rgba(255,255,255,.22);box-shadow:0 0 18px rgba(255,255,255,.08)}
+.cta{display:flex;align-items:center;justify-content:center;min-height:54px;margin-top:14px;border-radius:999px;background:var(--g-500);color:#fff;font-size:1.08rem;font-weight:950;text-decoration:none;box-shadow:0 7px 0 var(--g-800),0 0 24px rgba(31,191,87,.38);transition:transform .18s,filter .18s}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.note{margin:12px 0 0;color:rgba(255,255,255,.62);font-size:.76rem;font-weight:700;text-align:center}
+.hide{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:9px;color:rgba(255,255,255,.74);font-size:.82rem;font-weight:700}
+@media(max-width:820px){
+  body{overflow:auto}
+  .overlay{align-items:start;padding:14px 10px}
+  .modal{width:min(430px,100%);max-height:none;padding:14px;border-radius:24px;gap:12px}
+  .event-side{justify-content:flex-start;gap:9px}
+  .close{right:9px;top:9px;width:38px;height:38px}
+  .sound-toggle{right:9px;top:53px;width:38px;height:38px}
+  .ribbon{max-width:calc(100% - 58px);font-size:.74rem;padding:.48em .9em}
+  .hero-img{border-radius:15px}
+  .hero-img img{aspect-ratio:16/8.6}
+  .gift-float{width:44px;height:38px}
+  .headline h1{font-size:clamp(1.48rem,7.2vw,2rem);line-height:1.06;margin:0 0 5px}
+  .headline h2{font-size:1rem}
+  .star{width:84px;height:84px;font-size:.9rem;margin-bottom:1px}
+  .event-copy{font-size:.82rem;line-height:1.45}
+  .early{font-size:.82rem;line-height:1.35;padding:.74em .86em;border-radius:13px;text-align:center;word-break:keep-all}
+  .roulette-side{padding:12px;border-radius:20px}
+  .roulette-head{align-items:flex-start;flex-direction:column;gap:4px;margin-bottom:12px;padding-right:52px}
+  .roulette-head span{font-size:.76rem}
+  .roulette-head b{text-align:left;font-size:1rem}
+  .stage{width:min(292px,82vw)}
+  .pointer{border-left-width:16px;border-right-width:16px;border-top-width:31px}
+  .start{width:76px;height:76px;font-size:.8rem}
+  .wheel{border-width:7px}
+  .wheel::after{inset:31%;z-index:3}
+  .wheel__item{width:96px;height:82px;font-size:.78rem;gap:3px;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(82px) rotate(calc(-1 * var(--angle) - var(--wheel-rot,0deg)))}
+  .wheel__item img{width:64px;height:48px}
+  .wheel__emoji{width:64px;height:48px;font-size:2.35rem}
+  .wheel__item small{max-width:92px;padding:2px 6px;line-height:1.04}
+  .result{grid-template-columns:74px 1fr;padding:14px;gap:4px 12px}
+  .result img,.result-emoji{width:74px;height:74px}
+  .result b{font-size:1.14rem}
+  .result p{font-size:.84rem}
+  .cta{font-size:.98rem;min-height:50px}
+}
+@media(min-width:900px){
+  .modal{width:min(900px,94vw);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);align-items:start;gap:18px;padding:20px}
+  .event-side{gap:10px;min-height:613px;justify-content:center}
+  .hero-img img{aspect-ratio:16/9}
+  .headline h1{font-size:2rem;line-height:1.05;margin-bottom:6px}
+  .headline h2{font-size:1.05rem}
+  .star{width:92px;height:92px;font-size:.98rem}
+  .early{padding:.72em .9em;font-size:.88rem;line-height:1.28}
+  .event-copy{font-size:.86rem;line-height:1.48}
+  .roulette-side{padding:14px}
+  .stage{width:min(318px,100%)}
+  .result{grid-template-columns:58px 1fr}
+  .result img{width:58px;height:58px}
+  .result b{font-size:1rem}
+  .result p{font-size:.78rem}
+  .cta{min-height:48px}
+}
+@media(prefers-reduced-motion:reduce){.modal::before,.star,.wheel{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page-bg" aria-hidden="true"></div>
+<main class="overlay">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="sampleTitle">
+    <button class="close" type="button" aria-label="닫기">×</button>
+    <button class="sound-toggle" type="button" data-sound-toggle aria-label="효과음 끄기" aria-pressed="false">🔊</button>
+
+    <div class="event-side">
+      <span class="ribbon">🏆 전북모터사이클협회 특별 이벤트</span>
+      <figure class="hero-img">
+        <img src="assets/3d/prize_supercub.png" alt="슈퍼커브 경품 이벤트" />
+        <span class="gift-float" aria-hidden="true"></span>
+        <span class="gift-spark gift-spark--a" aria-hidden="true"></span>
+        <span class="gift-spark gift-spark--b" aria-hidden="true"></span>
+        <span class="gift-spark gift-spark--c" aria-hidden="true"></span>
+      </figure>
+      <div class="headline">
+        <h1 id="sampleTitle">전국 두발인에게 <span>쏜다!</span></h1>
+        <div class="star">역대<br/>최대</div>
+        <h2>경품 대잔치</h2>
+      </div>
+      <div class="early">🎁 참가신청 선착순 200명께 행사 당일 증정품 드려요!</div>
+      <p class="event-copy">참가만 해도 푸짐한 경품 추첨 기회. 1등 혼다 슈퍼커브부터 다양한 상품이 여러분을 기다립니다.</p>
+    </div>
+
+    <section class="roulette-side" data-roulette>
+      <div class="roulette-head">
+        <span>럭키드로우 미리보기</span>
+        <b>돌려보고 신청하기</b>
+      </div>
+      <div class="stage">
+        <div class="pointer" aria-hidden="true"></div>
+        <div class="wheel" data-roulette-wheel aria-hidden="true">
+          <span class="wheel__item" style="--i:0"><img src="assets/img/roulette_supercub.png" alt="" /><small>1등 슈퍼커브</small></span>
+          <span class="wheel__item" style="--i:1"><img src="assets/img/roulette_jacket.png" alt="" /><small>2등<br/>알파인스타즈 자켓</small></span>
+          <span class="wheel__item" style="--i:2"><img src="assets/img/roulette_helmet.png" alt="" /><small>3등 헬멧</small></span>
+          <span class="wheel__item" style="--i:3"><span class="wheel__emoji">🎁</span><small>4등 기념품</small></span>
+        </div>
+        <button class="start" type="button" data-roulette-start>상품<br/>회전</button>
+      </div>
+      <div class="result" data-roulette-result aria-live="polite">
+        <img src="assets/3d/mascot_thumbsup.png" alt="" data-roulette-image />
+        <span class="result-emoji" data-roulette-emoji hidden>🎁</span>
+        <span data-roulette-rank>READY</span>
+        <b data-roulette-name>경품 분위기를 먼저 느껴보세요</b>
+        <p data-roulette-message>참가 신청하면 행사장에서 실제 럭키드로우 응모권을 받을 수 있어요.</p>
+      </div>
+      <a class="cta" href="https://naver.me/x2YoYt5K" target="_blank" rel="noopener">응모권 받고 참가 신청하기 →</a>
+      <p class="note">홍보용 미리보기입니다. 실제 추첨은 행사장에서 진행됩니다.</p>
+      <label class="hide"><input type="checkbox" /> 오늘 하루 보지 않기</label>
+    </section>
+  </section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  const roulette = document.querySelector('[data-roulette]');
+  const wheel = roulette.querySelector('[data-roulette-wheel]');
+  const startBtn = roulette.querySelector('[data-roulette-start]');
+  const resultImg = roulette.querySelector('[data-roulette-image]');
+  const resultEmoji = roulette.querySelector('[data-roulette-emoji]');
+  const resultRank = roulette.querySelector('[data-roulette-rank]');
+  const resultName = roulette.querySelector('[data-roulette-name]');
+  const resultMessage = roulette.querySelector('[data-roulette-message]');
+  const soundToggle = document.querySelector('[data-sound-toggle]');
+  const prizes = [
+    { rank:'1등', name:'혼다 슈퍼커브 26년식', img:'assets/img/roulette_supercub.png', message:'이런 행운을 현장에서 노려보세요. 참가 신청하면 실제 추첨권을 받을 수 있어요.', weight:1 },
+    { rank:'2등', name:'알파인스타즈 라이딩 자켓', img:'assets/img/roulette_jacket.png', message:'라이더라면 탐나는 경품입니다. 신청하고 행사장 럭키드로우에 참여하세요.', weight:3 },
+    { rank:'3등', name:'스콜피온 엑소 헬멧', img:'assets/img/roulette_helmet.png', message:'안전 장비 경품까지 준비됩니다. 지금 신청하고 추첨 기회를 챙기세요.', weight:5 },
+    { rank:'4등', name:'두발인의 날 기념품', emoji:'🎁', message:'행사장에서 추억도 받고 경품 기회도 챙길 수 있어요.', weight:12 }
+  ];
+  let spinning = false;
+  let currentRotation = 0;
+  let audioCtx = null;
+  let masterGain = null;
+  let masterCompressor = null;
+  let muted = false;
+
+  function ensureAudio(){
+    if(!audioCtx){
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.72, audioCtx.currentTime);
+      masterCompressor = audioCtx.createDynamicsCompressor();
+      masterCompressor.threshold.setValueAtTime(-18, audioCtx.currentTime);
+      masterCompressor.knee.setValueAtTime(24, audioCtx.currentTime);
+      masterCompressor.ratio.setValueAtTime(6, audioCtx.currentTime);
+      masterCompressor.attack.setValueAtTime(0.006, audioCtx.currentTime);
+      masterCompressor.release.setValueAtTime(0.18, audioCtx.currentTime);
+      masterGain.connect(masterCompressor).connect(audioCtx.destination);
+    }
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+  function destination(){
+    const ctx = ensureAudio();
+    return masterGain || ctx.destination;
+  }
+  function setMuted(nextMuted){
+    muted = nextMuted;
+    if(soundToggle){
+      soundToggle.textContent = muted ? '🔇' : '🔊';
+      soundToggle.setAttribute('aria-pressed', String(muted));
+      soundToggle.setAttribute('aria-label', muted ? '효과음 켜기' : '효과음 끄기');
+    }
+    if(masterGain && audioCtx){
+      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      masterGain.gain.setTargetAtTime(muted ? 0.0001 : 0.72, audioCtx.currentTime, 0.03);
+    }
+  }
+  function playVoice(freq,start,duration,options){
+    if(muted) return;
+    const ctx = ensureAudio();
+    const opts = options || {};
+    const out = opts.destination || destination();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    const begin = ctx.currentTime + start;
+    const end = begin + duration;
+    const peak = opts.gain || 0.055;
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(opts.cutoff || 3600, begin);
+    filter.Q.setValueAtTime(opts.q || 0.7, begin);
+    gain.gain.setValueAtTime(0.0001, begin);
+    gain.gain.exponentialRampToValueAtTime(peak, begin + (opts.attack || 0.018));
+    gain.gain.setTargetAtTime(0.0001, Math.max(begin + 0.03, end - (opts.release || 0.12)), opts.release || 0.12);
+    filter.connect(gain).connect(out);
+    (opts.detunes || [-5,0,6]).forEach((detune, index) => {
+      const osc = ctx.createOscillator();
+      osc.type = opts.type || 'sawtooth';
+      osc.frequency.setValueAtTime(freq, begin);
+      osc.detune.setValueAtTime(detune, begin);
+      osc.connect(filter);
+      osc.start(begin);
+      osc.stop(end + 0.08);
+      if(index === 1 && opts.glideTo){
+        osc.frequency.exponentialRampToValueAtTime(opts.glideTo, end);
+      }
+    });
+    if(opts.octave !== false){
+      const sub = ctx.createOscillator();
+      const subGain = ctx.createGain();
+      sub.type = opts.subType || 'triangle';
+      sub.frequency.setValueAtTime(freq / 2, begin);
+      subGain.gain.setValueAtTime((peak * (opts.subGain || 0.34)), begin);
+      sub.connect(subGain).connect(filter);
+      sub.start(begin);
+      sub.stop(end + 0.08);
+    }
+  }
+  function playTone(freq,start,duration,type,gainValue){
+    playVoice(freq,start,duration,{type:type || 'sawtooth',gain:gainValue || 0.055,cutoff:3200});
+  }
+  function playMelody(notes,options){
+    notes.forEach(note => playVoice(note[0],note[1],note[2],options));
+  }
+  function playPad(freqs,start,duration,gainValue){
+    if(muted) return;
+    freqs.forEach((freq,index) => {
+      playVoice(freq,start + index * 0.018,duration,{
+        type:'sawtooth',
+        gain:gainValue || 0.026,
+        cutoff:1450,
+        q:0.55,
+        attack:0.08,
+        release:0.35,
+        detunes:[-7,0,5],
+        subGain:0.18
+      });
+    });
+  }
+  function playBass(freq,start,duration){
+    playVoice(freq,start,duration,{
+      type:'triangle',
+      gain:0.05,
+      cutoff:760,
+      detunes:[0],
+      octave:false,
+      attack:0.012,
+      release:0.12
+    });
+  }
+  function playSparkle(start,count){
+    if(muted) return;
+    for(let i=0;i<count;i+=1){
+      const freq = 1180 + Math.random() * 1320;
+      playVoice(freq,start + i * 0.035,0.18,{
+        type:'sine',
+        gain:0.018,
+        cutoff:6400,
+        detunes:[-4,4],
+        octave:false,
+        attack:0.006,
+        release:0.09
+      });
+    }
+  }
+  function playEchoedVoice(freq,start,duration,options){
+    playVoice(freq,start,duration,options);
+    playVoice(freq,start + 0.13,duration * 0.72,Object.assign({},options,{gain:(options.gain || 0.045) * 0.38}));
+    playVoice(freq,start + 0.27,duration * 0.55,Object.assign({},options,{gain:(options.gain || 0.045) * 0.18}));
+  }
+  function playSpinSound(){
+    if(muted) return;
+    const chords = [
+      [261.63,329.63,392],
+      [293.66,369.99,440],
+      [329.63,415.3,493.88],
+      [392,493.88,587.33]
+    ];
+    chords.forEach((chord,index) => playPad(chord,index * 0.95,1.05,0.019 + index * 0.003));
+    [130.81,146.83,164.81,196,220].forEach((freq,index) => playBass(freq,index * 0.72,0.46));
+
+    const pattern = [523.25,587.33,659.25,783.99,880,987.77,1046.5,1174.66];
+    let cursor = 0;
+    for(let i=0;i<38;i+=1){
+      const gap = 0.045 + Math.pow(i / 37, 1.8) * 0.085;
+      const freq = pattern[i % pattern.length] * (i > 24 ? 1.12 : 1);
+      playVoice(freq,cursor,0.065,{
+        type:'sawtooth',
+        gain:0.022,
+        cutoff:4400,
+        detunes:[-3,2,7],
+        octave:false,
+        attack:0.004,
+        release:0.045
+      });
+      cursor += gap;
+    }
+    playMelody([
+      [659,.35,.14],
+      [784,.52,.14],
+      [988,.7,.16],
+      [1175,.92,.18],
+      [1319,1.18,.22]
+    ], {type:'sawtooth',gain:0.032,cutoff:5200,detunes:[-5,0,6],subGain:0.2});
+  }
+  function playWinSound(){
+    if(muted) return;
+    playPad([261.63,329.63,392,523.25],0,0.72,0.03);
+    playPad([349.23,440,523.25,698.46],0.56,0.78,0.032);
+    playPad([392,493.88,587.33,783.99],1.14,1.2,0.035);
+    playMelody([
+      [523.25,0,.14],
+      [659.25,.13,.14],
+      [783.99,.26,.16],
+      [1046.5,.43,.2],
+      [1174.66,.66,.18],
+      [1318.51,.84,.2],
+      [1567.98,1.06,.24],
+      [2093,1.36,.5]
+    ], {type:'sawtooth',gain:0.07,cutoff:5600,detunes:[-6,0,5],subGain:0.24,attack:0.01,release:0.16});
+    [523.25,659.25,783.99,1046.5].forEach((freq,index) => {
+      playEchoedVoice(freq,1.32 + index * 0.025,0.72,{
+        type:'sawtooth',
+        gain:0.042,
+        cutoff:4800,
+        detunes:[-5,0,7],
+        subGain:0.22,
+        attack:0.018,
+        release:0.28
+      });
+    });
+    playBass(130.81,0,0.38);
+    playBass(174.61,0.56,0.4);
+    playBass(196,1.14,0.68);
+    playSparkle(1.22,18);
+  }
+  if(soundToggle){
+    soundToggle.addEventListener('click', function(){
+      ensureAudio();
+      setMuted(!muted);
+    });
+  }
+  function pickPrizeIndex(){
+    const total = prizes.reduce((sum,prize)=>sum+prize.weight,0);
+    let ticket = Math.random() * total;
+    for(let i=0;i<prizes.length;i+=1){
+      ticket -= prizes[i].weight;
+      if(ticket <= 0) return i;
+    }
+    return prizes.length - 1;
+  }
+  function setResult(prize){
+    if(prize.emoji){
+      resultImg.hidden = true;
+      resultEmoji.hidden = false;
+      resultEmoji.textContent = prize.emoji;
+    }else{
+      resultImg.hidden = false;
+      resultEmoji.hidden = true;
+      resultImg.src = prize.img;
+      resultImg.alt = prize.name;
+    }
+    resultRank.textContent = prize.rank;
+    resultName.textContent = prize.name;
+    resultMessage.textContent = prize.message;
+    roulette.classList.add('is-win');
+    roulette.classList.remove('is-lose');
+  }
+  startBtn.addEventListener('click', function(){
+    if(spinning) return;
+    spinning = true;
+    startBtn.disabled = true;
+    startBtn.innerHTML = '회전중';
+    roulette.classList.remove('is-win','is-lose');
+    resultRank.textContent = 'SPINNING';
+    resultName.textContent = '두구두구...';
+    resultMessage.textContent = '행사장 럭키드로우 분위기를 미리 느껴보세요.';
+    playSpinSound();
+
+    const prizeIndex = pickPrizeIndex();
+    const segment = 90;
+    const fullTurns = 5 + Math.floor(Math.random() * 3);
+    // wheel item angles: 0=right, 90=bottom, 180=left, 270=top(pointer).
+    // Rotate the selected item's center exactly under the top pointer.
+    const targetMod = (270 - prizeIndex * segment + 360) % 360;
+    const nextBase = Math.ceil((currentRotation + 1) / 360) * 360;
+    currentRotation = nextBase + fullTurns * 360 + targetMod;
+    wheel.style.transform = 'rotate(' + currentRotation + 'deg)';
+    wheel.style.setProperty('--wheel-rot', currentRotation + 'deg');
+
+    window.setTimeout(function(){
+      const prize = prizes[prizeIndex];
+      setResult(prize);
+      playWinSound();
+      startBtn.disabled = false;
+      startBtn.innerHTML = '상품<br/>회전';
+      spinning = false;
+    }, 5000);
+  });
+})();
+</script>
+</body>
+</html>
