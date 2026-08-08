@@ -23,25 +23,57 @@
 </head>
 <body>
 
-<!-- ===== PROMO POPUP ===== -->
+<!-- ===== PROMO POPUP (룰렛 이벤트) ===== -->
 <div class="promo" id="promo" hidden>
   <div class="promo__overlay" data-close></div>
-  <div class="promo__card" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+  <div class="promo__card promo__card--roulette" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
     <button class="promo__x" data-close type="button" aria-label="팝업 닫기">✕</button>
-    <span class="promo__ribbon">🏆 전북모터사이클협회 특별 이벤트</span>
-    <figure class="promo__img">
-      <img src="assets/3d/prize_supercub.png" alt="2천만원 상당 경품 이벤트" />
-      <img class="promo__mascot" src="assets/3d/mascot_thumbsup.png" alt="" aria-hidden="true" />
-    </figure>
-    <p class="promo__lead" id="promoTitle">전국 두발인에게 <b>쏜다!</b></p>
-    <div class="promo__prize">
-      <span class="promo__burst"><b>역대<br>최대</b></span>
-      <span class="promo__sub">경품 대잔치</span>
+    <button class="pp-sound" data-sound-toggle type="button" aria-label="효과음 끄기" aria-pressed="false">🔊</button>
+
+    <div class="pp-event">
+      <span class="pp-ribbon">🏆 전북모터사이클협회 특별 이벤트</span>
+      <figure class="pp-hero">
+        <img src="assets/3d/prize_supercub.png" alt="슈퍼커브 경품 이벤트" />
+        <span class="pp-gift" aria-hidden="true"></span>
+        <span class="pp-spark pp-spark--a" aria-hidden="true"></span>
+        <span class="pp-spark pp-spark--b" aria-hidden="true"></span>
+        <span class="pp-spark pp-spark--c" aria-hidden="true"></span>
+      </figure>
+      <div class="pp-headline">
+        <p class="pp-lead" id="promoTitle">전국 두발인에게 <span>쏜다!</span></p>
+        <div class="pp-star">역대<br>최대</div>
+        <p class="pp-sub">경품 대잔치</p>
+      </div>
+      <p class="pp-early">🎁 참가신청 <b>선착순 200명</b>께 행사 당일 증정품 드려요!</p>
+      <p class="pp-copy">참가만 해도 푸짐한 경품 추첨 기회. 1등 혼다 슈퍼커브부터 다양한 상품이 여러분을 기다립니다.</p>
     </div>
-    <p class="promo__urgent">🎁 참가신청 <b>선착순 200명</b>께 행사 당일 <b>증정품</b> 드려요!</p>
-    <p class="promo__desc">제5회 두발인의 날, 참가만 해도 푸짐한 경품 추첨 기회! 1등 혼다 슈퍼커브부터 다양한 상품이 여러분을 기다립니다.</p>
-    <a href="#apply" class="promo__cta" data-close>지금 참가신청하기 →</a>
-    <label class="promo__hide"><input type="checkbox" id="promoHide" /> 오늘 하루 보지 않기</label>
+
+    <section class="pp-roulette" data-roulette>
+      <div class="pp-rhead">
+        <span>럭키드로우 미리보기</span>
+        <b>돌려보고 신청하기</b>
+      </div>
+      <div class="pp-stage">
+        <div class="pp-pointer" aria-hidden="true"></div>
+        <div class="pp-wheel" data-roulette-wheel aria-hidden="true">
+          <span class="pp-witem" style="--i:0"><img src="assets/img/roulette_supercub.png" alt="" /><small>1등 슈퍼커브</small></span>
+          <span class="pp-witem" style="--i:1"><img src="assets/img/roulette_jacket.png" alt="" /><small>2등<br>알파인스타즈 자켓</small></span>
+          <span class="pp-witem" style="--i:2"><img src="assets/img/roulette_helmet.png" alt="" /><small>3등 헬멧</small></span>
+          <span class="pp-witem" style="--i:3"><span class="pp-wemoji">🎁</span><small>4등 기념품</small></span>
+        </div>
+        <button class="pp-start" type="button" data-roulette-start>상품<br>회전</button>
+      </div>
+      <div class="pp-result" data-roulette-result aria-live="polite">
+        <img src="assets/3d/mascot_thumbsup.png" alt="" data-roulette-image />
+        <span class="pp-remoji" data-roulette-emoji hidden>🎁</span>
+        <span data-roulette-rank>READY</span>
+        <b data-roulette-name>경품 분위기를 먼저 느껴보세요</b>
+        <p data-roulette-message>참가 신청하면 행사장에서 실제 럭키드로우 응모권을 받을 수 있어요.</p>
+      </div>
+      <a class="pp-cta" href="#apply" data-close>응모권 받고 참가 신청하기 →</a>
+      <p class="pp-note">홍보용 미리보기입니다. 실제 추첨은 행사장에서 진행됩니다.</p>
+      <label class="pp-hidecheck"><input type="checkbox" id="promoHide" /> 오늘 하루 보지 않기</label>
+    </section>
   </div>
 </div>
 

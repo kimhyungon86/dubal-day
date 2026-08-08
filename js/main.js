@@ -281,3 +281,280 @@
     });
   }
 })();
+
+/* ===== 프로모 팝업 룰렛 + 사운드 (Web Audio, 오디오 파일 없음) ===== */
+(function(){
+  'use strict';
+  const roulette = document.querySelector('[data-roulette]');
+  if (!roulette) return;
+  const wheel = roulette.querySelector('[data-roulette-wheel]');
+  const startBtn = roulette.querySelector('[data-roulette-start]');
+  const resultImg = roulette.querySelector('[data-roulette-image]');
+  const resultEmoji = roulette.querySelector('[data-roulette-emoji]');
+  const resultRank = roulette.querySelector('[data-roulette-rank]');
+  const resultName = roulette.querySelector('[data-roulette-name]');
+  const resultMessage = roulette.querySelector('[data-roulette-message]');
+  const soundToggle = document.querySelector('[data-sound-toggle]');
+  const prizes = [
+    { rank:'1등', name:'혼다 슈퍼커브 26년식', img:'assets/img/roulette_supercub.png', message:'이런 행운을 현장에서 노려보세요. 참가 신청하면 실제 추첨권을 받을 수 있어요.', weight:1 },
+    { rank:'2등', name:'알파인스타즈 라이딩 자켓', img:'assets/img/roulette_jacket.png', message:'라이더라면 탐나는 경품입니다. 신청하고 행사장 럭키드로우에 참여하세요.', weight:3 },
+    { rank:'3등', name:'스콜피온 엑소 헬멧', img:'assets/img/roulette_helmet.png', message:'안전 장비 경품까지 준비됩니다. 지금 신청하고 추첨 기회를 챙기세요.', weight:5 },
+    { rank:'4등', name:'두발인의 날 기념품', emoji:'🎁', message:'행사장에서 추억도 받고 경품 기회도 챙길 수 있어요.', weight:12 }
+  ];
+  let spinning = false;
+  let currentRotation = 0;
+  let audioCtx = null;
+  let masterGain = null;
+  let masterCompressor = null;
+  let muted = false;
+
+  function ensureAudio(){
+    if(!audioCtx){
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.72, audioCtx.currentTime);
+      masterCompressor = audioCtx.createDynamicsCompressor();
+      masterCompressor.threshold.setValueAtTime(-18, audioCtx.currentTime);
+      masterCompressor.knee.setValueAtTime(24, audioCtx.currentTime);
+      masterCompressor.ratio.setValueAtTime(6, audioCtx.currentTime);
+      masterCompressor.attack.setValueAtTime(0.006, audioCtx.currentTime);
+      masterCompressor.release.setValueAtTime(0.18, audioCtx.currentTime);
+      masterGain.connect(masterCompressor).connect(audioCtx.destination);
+    }
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+  function destination(){
+    const ctx = ensureAudio();
+    return masterGain || ctx.destination;
+  }
+  function setMuted(nextMuted){
+    muted = nextMuted;
+    if(soundToggle){
+      soundToggle.textContent = muted ? '🔇' : '🔊';
+      soundToggle.setAttribute('aria-pressed', String(muted));
+      soundToggle.setAttribute('aria-label', muted ? '효과음 켜기' : '효과음 끄기');
+    }
+    if(masterGain && audioCtx){
+      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      masterGain.gain.setTargetAtTime(muted ? 0.0001 : 0.72, audioCtx.currentTime, 0.03);
+    }
+  }
+  function playVoice(freq,start,duration,options){
+    if(muted) return;
+    const ctx = ensureAudio();
+    const opts = options || {};
+    const out = opts.destination || destination();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    const begin = ctx.currentTime + start;
+    const end = begin + duration;
+    const peak = opts.gain || 0.055;
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(opts.cutoff || 3600, begin);
+    filter.Q.setValueAtTime(opts.q || 0.7, begin);
+    gain.gain.setValueAtTime(0.0001, begin);
+    gain.gain.exponentialRampToValueAtTime(peak, begin + (opts.attack || 0.018));
+    gain.gain.setTargetAtTime(0.0001, Math.max(begin + 0.03, end - (opts.release || 0.12)), opts.release || 0.12);
+    filter.connect(gain).connect(out);
+    (opts.detunes || [-5,0,6]).forEach((detune, index) => {
+      const osc = ctx.createOscillator();
+      osc.type = opts.type || 'sawtooth';
+      osc.frequency.setValueAtTime(freq, begin);
+      osc.detune.setValueAtTime(detune, begin);
+      osc.connect(filter);
+      osc.start(begin);
+      osc.stop(end + 0.08);
+      if(index === 1 && opts.glideTo){
+        osc.frequency.exponentialRampToValueAtTime(opts.glideTo, end);
+      }
+    });
+    if(opts.octave !== false){
+      const sub = ctx.createOscillator();
+      const subGain = ctx.createGain();
+      sub.type = opts.subType || 'triangle';
+      sub.frequency.setValueAtTime(freq / 2, begin);
+      subGain.gain.setValueAtTime((peak * (opts.subGain || 0.34)), begin);
+      sub.connect(subGain).connect(filter);
+      sub.start(begin);
+      sub.stop(end + 0.08);
+    }
+  }
+  function playMelody(notes,options){
+    notes.forEach(note => playVoice(note[0],note[1],note[2],options));
+  }
+  function playPad(freqs,start,duration,gainValue){
+    if(muted) return;
+    freqs.forEach((freq,index) => {
+      playVoice(freq,start + index * 0.018,duration,{
+        type:'sawtooth',
+        gain:gainValue || 0.026,
+        cutoff:1450,
+        q:0.55,
+        attack:0.08,
+        release:0.35,
+        detunes:[-7,0,5],
+        subGain:0.18
+      });
+    });
+  }
+  function playBass(freq,start,duration){
+    playVoice(freq,start,duration,{
+      type:'triangle',
+      gain:0.05,
+      cutoff:760,
+      detunes:[0],
+      octave:false,
+      attack:0.012,
+      release:0.12
+    });
+  }
+  function playSparkle(start,count){
+    if(muted) return;
+    for(let i=0;i<count;i+=1){
+      const freq = 1180 + (i * 977 % 1320);
+      playVoice(freq,start + i * 0.035,0.18,{
+        type:'sine',
+        gain:0.018,
+        cutoff:6400,
+        detunes:[-4,4],
+        octave:false,
+        attack:0.006,
+        release:0.09
+      });
+    }
+  }
+  function playEchoedVoice(freq,start,duration,options){
+    playVoice(freq,start,duration,options);
+    playVoice(freq,start + 0.13,duration * 0.72,Object.assign({},options,{gain:(options.gain || 0.045) * 0.38}));
+    playVoice(freq,start + 0.27,duration * 0.55,Object.assign({},options,{gain:(options.gain || 0.045) * 0.18}));
+  }
+  function playSpinSound(){
+    if(muted) return;
+    const chords = [
+      [261.63,329.63,392],
+      [293.66,369.99,440],
+      [329.63,415.3,493.88],
+      [392,493.88,587.33]
+    ];
+    chords.forEach((chord,index) => playPad(chord,index * 0.95,1.05,0.019 + index * 0.003));
+    [130.81,146.83,164.81,196,220].forEach((freq,index) => playBass(freq,index * 0.72,0.46));
+
+    const pattern = [523.25,587.33,659.25,783.99,880,987.77,1046.5,1174.66];
+    let cursor = 0;
+    for(let i=0;i<38;i+=1){
+      const gap = 0.045 + Math.pow(i / 37, 1.8) * 0.085;
+      const freq = pattern[i % pattern.length] * (i > 24 ? 1.12 : 1);
+      playVoice(freq,cursor,0.065,{
+        type:'sawtooth',
+        gain:0.022,
+        cutoff:4400,
+        detunes:[-3,2,7],
+        octave:false,
+        attack:0.004,
+        release:0.045
+      });
+      cursor += gap;
+    }
+    playMelody([
+      [659,.35,.14],
+      [784,.52,.14],
+      [988,.7,.16],
+      [1175,.92,.18],
+      [1319,1.18,.22]
+    ], {type:'sawtooth',gain:0.032,cutoff:5200,detunes:[-5,0,6],subGain:0.2});
+  }
+  function playWinSound(){
+    if(muted) return;
+    playPad([261.63,329.63,392,523.25],0,0.72,0.03);
+    playPad([349.23,440,523.25,698.46],0.56,0.78,0.032);
+    playPad([392,493.88,587.33,783.99],1.14,1.2,0.035);
+    playMelody([
+      [523.25,0,.14],
+      [659.25,.13,.14],
+      [783.99,.26,.16],
+      [1046.5,.43,.2],
+      [1174.66,.66,.18],
+      [1318.51,.84,.2],
+      [1567.98,1.06,.24],
+      [2093,1.36,.5]
+    ], {type:'sawtooth',gain:0.07,cutoff:5600,detunes:[-6,0,5],subGain:0.24,attack:0.01,release:0.16});
+    [523.25,659.25,783.99,1046.5].forEach((freq,index) => {
+      playEchoedVoice(freq,1.32 + index * 0.025,0.72,{
+        type:'sawtooth',
+        gain:0.042,
+        cutoff:4800,
+        detunes:[-5,0,7],
+        subGain:0.22,
+        attack:0.018,
+        release:0.28
+      });
+    });
+    playBass(130.81,0,0.38);
+    playBass(174.61,0.56,0.4);
+    playBass(196,1.14,0.68);
+    playSparkle(1.22,18);
+  }
+  if(soundToggle){
+    soundToggle.addEventListener('click', function(){
+      ensureAudio();
+      setMuted(!muted);
+    });
+  }
+  function pickPrizeIndex(){
+    const total = prizes.reduce((sum,prize)=>sum+prize.weight,0);
+    let ticket = Math.random() * total;
+    for(let i=0;i<prizes.length;i+=1){
+      ticket -= prizes[i].weight;
+      if(ticket <= 0) return i;
+    }
+    return prizes.length - 1;
+  }
+  function setResult(prize){
+    if(prize.emoji){
+      resultImg.hidden = true;
+      resultEmoji.hidden = false;
+      resultEmoji.textContent = prize.emoji;
+    }else{
+      resultImg.hidden = false;
+      resultEmoji.hidden = true;
+      resultImg.src = prize.img;
+      resultImg.alt = prize.name;
+    }
+    resultRank.textContent = prize.rank;
+    resultName.textContent = prize.name;
+    resultMessage.textContent = prize.message;
+    roulette.classList.add('is-win');
+    roulette.classList.remove('is-lose');
+  }
+  startBtn.addEventListener('click', function(){
+    if(spinning) return;
+    spinning = true;
+    startBtn.disabled = true;
+    startBtn.innerHTML = '회전중';
+    roulette.classList.remove('is-win','is-lose');
+    resultRank.textContent = 'SPINNING';
+    resultName.textContent = '두구두구...';
+    resultMessage.textContent = '행사장 럭키드로우 분위기를 미리 느껴보세요.';
+    playSpinSound();
+
+    const prizeIndex = pickPrizeIndex();
+    const segment = 90;
+    const fullTurns = 5 + Math.floor(Math.random() * 3);
+    // 휠 아이템 각도: 0=오른쪽, 90=아래, 180=왼쪽, 270=위(포인터). 당첨 아이템 중앙을 상단 포인터 아래로.
+    const targetMod = (270 - prizeIndex * segment + 360) % 360;
+    const nextBase = Math.ceil((currentRotation + 1) / 360) * 360;
+    currentRotation = nextBase + fullTurns * 360 + targetMod;
+    wheel.style.transform = 'rotate(' + currentRotation + 'deg)';
+    wheel.style.setProperty('--wheel-rot', currentRotation + 'deg');
+
+    window.setTimeout(function(){
+      const prize = prizes[prizeIndex];
+      setResult(prize);
+      playWinSound();
+      startBtn.disabled = false;
+      startBtn.innerHTML = '상품<br>회전';
+      spinning = false;
+    }, 5000);
+  });
+})();
