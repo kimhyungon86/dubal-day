@@ -596,3 +596,13 @@
   show.addEventListener('mouseenter', stop);
   show.addEventListener('mouseleave', start);
 })();
+
+/* ===== 후원사 로고 슬라이딩 마퀴 - 끊김 없는 루프 위해 한 벌 복제 ===== */
+(function(){
+  'use strict';
+  const track = document.querySelector('[data-sponsor-mq]');
+  if (!track) return;
+  const originals = [...track.children];
+  if (!originals.length) return;
+  originals.forEach((el) => track.appendChild(el.cloneNode(true)));
+})();
