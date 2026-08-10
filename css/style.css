@@ -612,7 +612,6 @@ a:focus-visible,
 .sponsor-logo-card--honda img,
 .sponsor-logo-card--ktm img{height:52px}
 .sponsor-logo-card--liquimoly img{height:62px;max-width:min(148px,82%)}
-.sponsor-logo-card--yamaha img{height:48px;max-width:min(180px,90%)}
 .sponsor-logo-card--royalenfield img{height:38px;max-width:min(184px,90%)}
 .sponsor-logo-card span{font-size:.82rem;font-weight:800;color:var(--muted);letter-spacing:.01em}
 .sponsor-logo-card--badge{background:linear-gradient(145deg,#073415,var(--g-700) 54%,var(--g-500));color:#fff;border-color:rgba(255,255,255,.4);position:relative;overflow:hidden}
@@ -664,7 +663,6 @@ a:focus-visible,
   .sponsor-logo-card img{height:46px}
   .sponsor-logo-card--alpinestars img{height:34px}
   .sponsor-logo-card--liquimoly img{height:50px}
-  .sponsor-logo-card--yamaha img{height:38px}
   .sponsor-logo-card--royalenfield img{height:30px}
   .sponsor-logo-card--badge b{font-size:2.5rem}
   .sponsor-block__head{flex-direction:column;gap:2px}
