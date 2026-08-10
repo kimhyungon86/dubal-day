@@ -393,9 +393,21 @@ a:focus-visible,
 .prize{background:linear-gradient(180deg,#eef7ea,var(--cream))}
 .prize__lead{word-break:keep-all}
 .prize__grid{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;margin-top:40px;padding:26px;border-radius:30px;background:linear-gradient(160deg,#0a3a22,#052015);border:2px solid rgba(199,242,132,.6);box-shadow:0 0 42px rgba(31,191,87,.44),0 0 90px rgba(199,242,132,.3),inset 0 0 42px rgba(31,191,87,.14);animation:neonBox 3.4s ease-in-out infinite}
-.prize__img{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.3)}
-.prize__img img{width:100%;display:block}
-.prize__gift{position:absolute;left:12px;top:12px;font-size:2.7rem;z-index:2;filter:drop-shadow(0 5px 10px rgba(0,0,0,.28));animation:giftBounce 2s ease-in-out infinite}
+.prize__show{position:relative;aspect-ratio:4/3;background:#fff;border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.3)}
+.prize__slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(1.03);transition:opacity .6s ease,transform .6s ease;pointer-events:none}
+.prize__slide.is-active{opacity:1;transform:scale(1);z-index:1}
+.prize__slide img{width:100%;height:100%;object-fit:contain;padding:20px;display:block}
+.prize__slide-rank{position:absolute;left:16px;bottom:16px;z-index:3;background:var(--g-500);color:#04240f;font-weight:900;font-size:.9rem;padding:.34em 1em;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.28)}
+.prize__slide-name{position:absolute;right:16px;bottom:16px;z-index:3;max-width:60%;text-align:right;color:#07331d;font-weight:900;font-size:1rem;line-height:1.2;word-break:keep-all;background:rgba(255,255,255,.86);padding:.36em .72em;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.16)}
+.prize__slide--gold .prize__slide-rank{background:var(--gold);color:#3a2a00}
+.prize__slide--silver .prize__slide-rank{background:#dfe8e3;color:#0b3b22}
+.prize__slide--green .prize__slide-rank{background:var(--g-500);color:#04240f}
+.prize__slide--lime .prize__slide-rank{background:var(--lime);color:#0b3b22}
+.prize__slide--gift{flex-direction:column;gap:12px;background:radial-gradient(circle at 50% 36%,#0b7a37,#052015 80%)}
+.prize__slide-box{font-size:clamp(5rem,16vw,7.5rem);line-height:1;filter:drop-shadow(0 10px 20px rgba(0,0,0,.4));animation:giftBounce 2s ease-in-out infinite}
+.prize__slide--gift .prize__slide-rank{position:static;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.prize__slide--gift .prize__slide-name{position:static;max-width:none;text-align:center;color:#fff;background:none;box-shadow:none;font-size:1.18rem;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.prize__gift{position:absolute;left:14px;top:14px;font-size:clamp(3rem,5vw,3.8rem);z-index:4;filter:drop-shadow(0 6px 12px rgba(0,0,0,.32));animation:giftBounce 2s ease-in-out infinite}
 @keyframes giftBounce{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-7px) rotate(7deg)}}
 .prize__list{list-style:none;margin:0;display:flex;flex-direction:column;gap:14px}
 @keyframes neonBox{0%,100%{border-color:rgba(199,242,132,.6);box-shadow:0 0 42px rgba(31,191,87,.44),0 0 90px rgba(199,242,132,.3),inset 0 0 42px rgba(31,191,87,.14)}50%{border-color:rgba(199,242,132,1);box-shadow:0 0 62px rgba(31,191,87,.78),0 0 120px rgba(199,242,132,.55),inset 0 0 54px rgba(31,191,87,.3)}}
@@ -416,7 +428,9 @@ a:focus-visible,
 @keyframes limePulse{0%,100%{box-shadow:0 0 18px rgba(199,242,132,.2),0 12px 26px rgba(0,0,0,.16)}50%{box-shadow:0 0 34px rgba(199,242,132,.44),0 0 54px rgba(31,191,87,.24),0 12px 26px rgba(0,0,0,.16)}}
 .prize__thumb{width:66px;height:66px;object-fit:contain;margin-left:auto;border-radius:12px;background:#fff;border:1px solid rgba(255,255,255,.35);padding:4px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
 @keyframes prizePulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
-@media(prefers-reduced-motion:reduce){.prize__grid,.prize__list li,.prize__list li .prize__name,.prize__gift{animation:none!important}}
+.prize__list li{transition:transform .4s ease}
+.prize__list li.is-current{transform:scale(1.035)}
+@media(prefers-reduced-motion:reduce){.prize__grid,.prize__list li,.prize__list li .prize__name,.prize__gift,.prize__slide-box{animation:none!important}.prize__slide{transition:none!important}}
 @media(max-width:820px){.prize__grid{grid-template-columns:1fr;gap:26px}}
 
 /* ---- GALLERY ---- */

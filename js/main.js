@@ -558,3 +558,41 @@
     }, 5000);
   });
 })();
+
+/* ===== 경품 섹션 왼쪽 쇼케이스 자동 회전 + 오른쪽 목록 동기화 ===== */
+(function(){
+  'use strict';
+  const show = document.querySelector('[data-prize-show]');
+  if (!show) return;
+  const slides = [...show.querySelectorAll('[data-prize-slide]')];
+  if (slides.length < 2) return;
+  const items = [...document.querySelectorAll('.prize__list li')];
+  let idx = 0;
+  let timer = null;
+
+  function go(n) {
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === n));
+    items.forEach((li, i) => li.classList.toggle('is-current', i === n));
+  }
+  go(0);
+
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (reduce) return; // 모션 최소화: 1등 고정, 자동회전 안 함
+
+  const INTERVAL = 3500;
+  function start() {
+    stop();
+    timer = window.setInterval(() => {
+      idx = (idx + 1) % slides.length;
+      go(idx);
+    }, INTERVAL);
+  }
+  function stop() {
+    if (timer) { window.clearInterval(timer); timer = null; }
+  }
+  start();
+
+  // 마우스 올리면 일시정지, 벗어나면 재개
+  show.addEventListener('mouseenter', stop);
+  show.addEventListener('mouseleave', start);
+})();
