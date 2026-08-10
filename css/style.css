@@ -583,6 +583,9 @@ a:focus-visible,
 @keyframes sponsorMq{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 @media(max-width:640px){.sponsor-mq__chip{width:112px;height:58px;padding:10px 13px}.sponsor-mq__track{gap:12px}}
 @media(prefers-reduced-motion:reduce){.sponsor-mq__track{animation:none}}
+/* 모바일 전용 브랜드몰 안내 문구 (여백) */
+.sponsor-hint{display:none}
+@media(max-width:820px){.sponsor-hint{display:inline-block;margin:18px auto 0;text-align:center;color:var(--g-700);font-weight:800;font-size:.94rem;background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:999px;padding:.72em 1.2em;box-shadow:var(--shadow-sm)}}
 .sponsor-block,
 .partner-block{
   margin-top:34px;
