@@ -218,6 +218,7 @@ a:focus-visible,
   .hero{padding-top:84px;padding-bottom:64px}
   .hero__inner{margin-top:-128px}
   .hero__actions .btn--ghost{display:none}
+  .hero__actions .btn--ghost.hero__contact{display:inline-flex}
   .hero__mascot{
     display:block;height:92px;width:92px;z-index:3;opacity:.95;bottom:19vh;top:auto;
     animation:mascotWalkMobile 18s linear infinite;
