@@ -227,7 +227,7 @@ a:focus-visible,
     position:fixed;bottom:84px;top:auto;right:auto;left:0;height:78px;width:78px;z-index:80;
     animation:mascotFollowWalk 11s linear infinite;
   }
-  .hero__joinflow{bottom:88px;width:calc(100% - 28px);padding:7px 12px;border-radius:18px}
+  .hero__joinflow{position:static;transform:none;left:auto;bottom:auto;width:calc(100% - 28px);margin:8px auto 0;padding:7px 12px;border-radius:18px}
   .hero__joinflow-head{flex-direction:column;gap:5px}
   .hero__joinflow-head span{font-size:.92rem}
   .joinflow__board{padding:5px 12px;margin-bottom:5px}
