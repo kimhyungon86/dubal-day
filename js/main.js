@@ -607,3 +607,32 @@
   if (!originals.length) return;
   originals.forEach((el) => track.appendChild(el.cloneNode(true)));
 })();
+
+/* ===== 프로그램 배경영상 자동재생 보장 (브라우저 자동재생 정책 대응) ===== */
+(function(){
+  'use strict';
+  const video = document.querySelector('.prog-video video');
+  if (!video) return;
+  video.muted = true; // 정책상 muted여야 자동재생 허용
+  video.setAttribute('muted', '');
+  const tryPlay = () => {
+    const p = video.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+  // 화면에 보일 때만 재생, 벗어나면 정지(성능)
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) tryPlay();
+        else video.pause();
+      });
+    }, { threshold: 0.25 });
+    io.observe(video);
+  } else {
+    tryPlay();
+  }
+  // 사용자 첫 상호작용 시에도 한 번 더 재생 시도(정책 우회)
+  const kick = () => { tryPlay(); document.removeEventListener('touchstart', kick); document.removeEventListener('click', kick); };
+  document.addEventListener('touchstart', kick, { passive: true });
+  document.addEventListener('click', kick);
+})();
