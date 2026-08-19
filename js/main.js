@@ -136,11 +136,14 @@
 
   function getProjectedParticipants(now) {
     const current = now || getKstNow();
-    const today = kstDayMs(
+    // 자정 기준일 + 현재 시각을 4시간 블록으로 내림 → 하루 6번(00·04·08·12·16·20시) 갱신
+    const dayStart = kstDayMs(
       current.getFullYear() + '-' +
       String(current.getMonth() + 1).padStart(2, '0') + '-' +
       String(current.getDate()).padStart(2, '0')
     );
+    const block = Math.floor(current.getHours() / 4); // 0~5
+    const slot = dayStart + block * 4 * 60 * 60 * 1000;
     const points = [
       ['2026-08-06', 0],
       ['2026-08-11', 151],
@@ -151,12 +154,12 @@
       ['2026-09-18', 1000],
     ].map(([date, count]) => ({ t: kstDayMs(date), count }));
 
-    if (today <= points[0].t) return points[0].count;
+    if (slot <= points[0].t) return points[0].count;
     for (let i = 1; i < points.length; i += 1) {
-      if (today <= points[i].t) {
+      if (slot <= points[i].t) {
         const prev = points[i - 1];
         const next = points[i];
-        const ratio = (today - prev.t) / (next.t - prev.t);
+        const ratio = (slot - prev.t) / (next.t - prev.t);
         return Math.round(prev.count + (next.count - prev.count) * ratio);
       }
     }
