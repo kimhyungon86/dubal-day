@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부스 배치도 · 항공샷</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1520;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;padding:20px}
+.bm-sec{max-width:1080px;margin:0 auto}
+.bm-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+.bm-arena{position:relative;width:1000px;height:750px;margin:0 auto;border-radius:16px;overflow:hidden;
+  background:url('assets/img/aerial_ai.jpg') center/cover no-repeat;box-shadow:0 16px 44px rgba(0,0,0,.55)}
+.bm-dark{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,22,.15),rgba(6,12,22,.05) 45%,rgba(6,12,22,.25));z-index:1}
+
+.bm-title{position:absolute;left:0;top:0;background:linear-gradient(135deg,#1e4b8f,#15325f);
+  color:#fff;padding:14px 24px 14px 20px;border-bottom-right-radius:20px;box-shadow:0 6px 16px rgba(0,0,0,.5);z-index:10}
+.bm-title h2{font-size:24px;font-weight:900;letter-spacing:-.5px}
+.bm-title p{font-size:13px;color:#bcd4f5;margin-top:3px}
+
+.bm-call{position:absolute;background:rgba(21,42,80,.95);color:#fff;border-radius:10px;padding:8px 12px;z-index:9;
+  box-shadow:0 5px 16px rgba(0,0,0,.55);border:1px solid #3a6bb0;max-width:200px}
+.bm-call .hd{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.bm-call .no{display:inline-flex;width:21px;height:21px;border-radius:50%;background:#2f6fd6;color:#fff;
+  font-size:12px;font-weight:900;align-items:center;justify-content:center;flex:none}
+.bm-call b{font-size:13.5px;font-weight:900}
+.bm-call span{display:block;font-size:10.5px;color:#b9d1f2;margin-top:3px;line-height:1.35}
+
+.bm-gate{position:absolute;z-index:9;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bm-gate .ic{width:40px;height:40px;border-radius:50%;background:#2f6fd6;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 12px rgba(0,0,0,.55)}
+.bm-gate .tg{background:#15325f;color:#fff;font-size:11px;font-weight:800;padding:2px 10px;border-radius:10px}
+svg.bm-flow{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+
+.bm-legend{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.94);border-radius:12px;padding:12px 14px;z-index:9;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.bm-legend h4{color:#15325f;font-size:12px;font-weight:900;margin-bottom:8px;letter-spacing:1px}
+.bm-legend div{display:flex;align-items:center;gap:8px;margin:5px 0;color:#2b3a4a;font-size:11px;font-weight:700}
+.bm-legend .sw{width:22px;height:22px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;flex:none;background:#e7edf4;font-size:12px}
+
+.bm-roster{position:absolute;right:14px;bottom:14px;background:rgba(21,42,80,.94);border:1px solid #3a6bb0;border-radius:12px;
+  padding:11px 14px;z-index:9;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.bm-roster b{display:block;color:#fff;font-size:11px;font-weight:900;margin-bottom:6px}
+.bm-roster .cols{display:flex;gap:16px}
+.bm-roster p{color:#dbe6f5;font-size:9.5px;font-weight:600;line-height:1.65}
+</style>
+</head>
+<body>
+<section class="bm-sec">
+  <div class="bm-scroll">
+  <div class="bm-arena">
+    <div class="bm-dark"></div>
+
+    <svg class="bm-flow" viewBox="0 0 1000 750" preserveAspectRatio="none">
+      <path d="M175 660 C 150 560, 220 540, 330 545 C 520 552, 540 470, 660 470 C 830 470, 870 560, 855 650"
+        fill="none" stroke="#5b9bf0" stroke-width="3.5" stroke-dasharray="11 9" opacity=".92"/>
+      <polygon points="855,650 848,632 862,632" fill="#5b9bf0"/>
+    </svg>
+
+    <div class="bm-title"><h2>🏁 행사장 배치도 · 항공샷</h2><p>제5회 두발인의 날 · 부안 모터뱅크 | 전체 구성 한눈에 보기</p></div>
+
+    <!-- 콜아웃 ①~⑦ -->
+    <div class="bm-call" style="left:730px;top:80px"><span class="hd"><span class="no">1</span><b>메인 건물</b></span><span>접수·안내 · 화장실 · 식음료존</span></div>
+    <div class="bm-call" style="left:40px;top:300px"><span class="hd"><span class="no">2</span><b>행사 부스 구역</b></span><span>협력업체 19곳 · 체험·홍보존</span></div>
+    <div class="bm-call" style="left:400px;top:120px"><span class="hd"><span class="no">3</span><b>메인 무대 / 중앙</b></span><span>공연 · 세레모니 · 이벤트</span></div>
+    <div class="bm-call" style="left:600px;top:560px"><span class="hd"><span class="no">4</span><b>바이크 전시 / 대기</b></span><span>바이크 전시 · 참가자 대기·정렬</span></div>
+    <div class="bm-call" style="left:770px;top:330px"><span class="hd"><span class="no">5</span><b>체험·먹거리 구역</b></span><span>거북이레이스·미니짐카나·푸드</span></div>
+    <div class="bm-call" style="left:800px;top:180px"><span class="hd"><span class="no">6</span><b>주차 구역</b></span><span>일반 차량 주차</span></div>
+    <div class="bm-call" style="left:36px;top:470px"><span class="hd"><span class="no">7</span><b>출입 동선</b></span><span>입구 › 내부 › 출구</span></div>
+
+    <div class="bm-gate" style="left:150px;top:600px"><div class="ic">🚶🚗</div><div class="tg">입구·출구</div></div>
+
+    <div class="bm-legend">
+      <h4>범례 (LEGEND)</h4>
+      <div><span class="sw">🅿️</span>주차 구역</div>
+      <div><span class="sw">⛺</span>부스 구역</div>
+      <div><span class="sw">🎤</span>무대·중앙</div>
+      <div><span class="sw">🏍️</span>바이크 전시·대기</div>
+      <div><span class="sw" style="background:transparent"><span style="display:inline-block;width:16px;border-top:3px dashed #2f6fd6"></span></span>출입 동선</div>
+    </div>
+
+    <div class="bm-roster">
+      <b>협력업체 부스 19곳</b>
+      <div class="cols">
+        <p>1 WP서스펜션<br>2 유로그립<br>3 KTM남양주<br>4 로얄엔필드<br>5 혼다전주<br>6 모터뱅크<br>7 코미네<br>8 패스트하우스<br>9 JPX헬멧<br>10 모토그래픽스</p>
+        <p>11 혼다익산<br>12 스콜피온<br>13 알파인스타<br>14 리퀴몰리<br>15 피네스<br>16 CF모토<br>17 허스크바나<br>18 motohub<br>19 GR</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+</body>
+</html>
