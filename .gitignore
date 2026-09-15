@@ -2,3 +2,9 @@ assets/3d/mascot_*_key.png
 .DS_Store
 CODEX_IMAGE_BRIEF.md
 .gstack/
+
+# 행사장 배치도 - 로컬 전용 (홈페이지 배포 안 함)
+booth-map-proto.html
+booth-map-aerial.html
+booth-map-v2.html
+assets/img/aerial_ai.jpg
